@@ -1,0 +1,178 @@
+<div>
+  <h2 id="page-heading" data-cy="FormationDoctorantHeading">
+    <span jhiTranslate="doctorantApp.formationDoctorant.home.title">Formation Doctorants</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="doctorantApp.formationDoctorant.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-formation-doctorant"
+        [routerLink]="['/formation-doctorant/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="doctorantApp.formationDoctorant.home.createLabel"> Create a new Formation Doctorant </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="formationDoctorants?.length === 0">
+    <span jhiTranslate="doctorantApp.formationDoctorant.home.notFound">No formationDoctorants found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="formationDoctorants && formationDoctorants.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span jhiTranslate="doctorantApp.formationDoctorant.specialite">Specialite</span></th>
+          <th scope="col"><span jhiTranslate="doctorantApp.formationDoctorant.type">Type</span></th>
+          <th scope="col"><span jhiTranslate="doctorantApp.formationDoctorant.dateObtention">Date Obtention</span></th>
+          <th scope="col"><span jhiTranslate="doctorantApp.formationDoctorant.note1">Note 1</span></th>
+          <th scope="col"><span jhiTranslate="doctorantApp.formationDoctorant.scanneNote1">Scanne Note 1</span></th>
+          <th scope="col"><span jhiTranslate="doctorantApp.formationDoctorant.note2">Note 2</span></th>
+          <th scope="col"><span jhiTranslate="doctorantApp.formationDoctorant.scanneNote2">Scanne Note 2</span></th>
+          <th scope="col"><span jhiTranslate="doctorantApp.formationDoctorant.note3">Note 3</span></th>
+          <th scope="col"><span jhiTranslate="doctorantApp.formationDoctorant.scanneNote3">Scanne Note 3</span></th>
+          <th scope="col"><span jhiTranslate="doctorantApp.formationDoctorant.note4">Note 4</span></th>
+          <th scope="col"><span jhiTranslate="doctorantApp.formationDoctorant.scanneNote4">Scanne Note 4</span></th>
+          <th scope="col"><span jhiTranslate="doctorantApp.formationDoctorant.note5">Note 5</span></th>
+          <th scope="col"><span jhiTranslate="doctorantApp.formationDoctorant.scanneNote5">Scanne Note 5</span></th>
+          <th scope="col"><span jhiTranslate="doctorantApp.formationDoctorant.scanneDiplome">Scanne Diplome</span></th>
+          <th scope="col"><span jhiTranslate="doctorantApp.formationDoctorant.mention">Mention</span></th>
+          <th scope="col"><span jhiTranslate="doctorantApp.formationDoctorant.formation">Formation</span></th>
+          <th scope="col"><span jhiTranslate="doctorantApp.formationDoctorant.doctorant">Doctorant</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let formationDoctorant of formationDoctorants; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/formation-doctorant', formationDoctorant.id, 'view']">{{ formationDoctorant.id }}</a>
+          </td>
+          <td>{{ formationDoctorant.specialite }}</td>
+          <td>{{ formationDoctorant.type }}</td>
+          <td>{{ formationDoctorant.dateObtention }}</td>
+          <td>{{ formationDoctorant.note1 }}</td>
+          <td>
+            <a
+              *ngIf="formationDoctorant.scanneNote1"
+              (click)="openFile(formationDoctorant.scanneNote1, formationDoctorant.scanneNote1ContentType)"
+              jhiTranslate="entity.action.open"
+              >open</a
+            >
+            <span *ngIf="formationDoctorant.scanneNote1"
+              >{{ formationDoctorant.scanneNote1ContentType }}, {{ byteSize(formationDoctorant.scanneNote1) }}</span
+            >
+          </td>
+          <td>{{ formationDoctorant.note2 }}</td>
+          <td>
+            <a
+              *ngIf="formationDoctorant.scanneNote2"
+              (click)="openFile(formationDoctorant.scanneNote2, formationDoctorant.scanneNote2ContentType)"
+              jhiTranslate="entity.action.open"
+              >open</a
+            >
+            <span *ngIf="formationDoctorant.scanneNote2"
+              >{{ formationDoctorant.scanneNote2ContentType }}, {{ byteSize(formationDoctorant.scanneNote2) }}</span
+            >
+          </td>
+          <td>{{ formationDoctorant.note3 }}</td>
+          <td>
+            <a
+              *ngIf="formationDoctorant.scanneNote3"
+              (click)="openFile(formationDoctorant.scanneNote3, formationDoctorant.scanneNote3ContentType)"
+              jhiTranslate="entity.action.open"
+              >open</a
+            >
+            <span *ngIf="formationDoctorant.scanneNote3"
+              >{{ formationDoctorant.scanneNote3ContentType }}, {{ byteSize(formationDoctorant.scanneNote3) }}</span
+            >
+          </td>
+          <td>{{ formationDoctorant.note4 }}</td>
+          <td>
+            <a
+              *ngIf="formationDoctorant.scanneNote4"
+              (click)="openFile(formationDoctorant.scanneNote4, formationDoctorant.scanneNote4ContentType)"
+              jhiTranslate="entity.action.open"
+              >open</a
+            >
+            <span *ngIf="formationDoctorant.scanneNote4"
+              >{{ formationDoctorant.scanneNote4ContentType }}, {{ byteSize(formationDoctorant.scanneNote4) }}</span
+            >
+          </td>
+          <td>{{ formationDoctorant.note5 }}</td>
+          <td>
+            <a
+              *ngIf="formationDoctorant.scanneNote5"
+              (click)="openFile(formationDoctorant.scanneNote5, formationDoctorant.scanneNote5ContentType)"
+              jhiTranslate="entity.action.open"
+              >open</a
+            >
+            <span *ngIf="formationDoctorant.scanneNote5"
+              >{{ formationDoctorant.scanneNote5ContentType }}, {{ byteSize(formationDoctorant.scanneNote5) }}</span
+            >
+          </td>
+          <td>
+            <a
+              *ngIf="formationDoctorant.scanneDiplome"
+              (click)="openFile(formationDoctorant.scanneDiplome, formationDoctorant.scanneDiplomeContentType)"
+              jhiTranslate="entity.action.open"
+              >open</a
+            >
+            <span *ngIf="formationDoctorant.scanneDiplome"
+              >{{ formationDoctorant.scanneDiplomeContentType }}, {{ byteSize(formationDoctorant.scanneDiplome) }}</span
+            >
+          </td>
+          <td>{{ formationDoctorant.mention }}</td>
+          <td>
+            <div *ngIf="formationDoctorant.formation">
+              <a [routerLink]="['/formation', formationDoctorant.formation?.id, 'view']">{{ formationDoctorant.formation?.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="formationDoctorant.doctorant">
+              <a [routerLink]="['/doctorant', formationDoctorant.doctorant?.id, 'view']">{{ formationDoctorant.doctorant?.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/formation-doctorant', formationDoctorant.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/formation-doctorant', formationDoctorant.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(formationDoctorant)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

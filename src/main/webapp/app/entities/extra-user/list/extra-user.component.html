@@ -1,0 +1,98 @@
+<div>
+  <h2 id="page-heading" data-cy="ExtraUserHeading">
+    <span jhiTranslate="doctorantApp.extraUser.home.title">Extra Users</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="doctorantApp.extraUser.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-extra-user"
+        [routerLink]="['/extra-user/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="doctorantApp.extraUser.home.createLabel"> Create a new Extra User </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="extraUsers?.length === 0">
+    <span jhiTranslate="doctorantApp.extraUser.home.notFound">No extraUsers found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="extraUsers && extraUsers.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span jhiTranslate="doctorantApp.extraUser.cin">Cin</span></th>
+          <th scope="col"><span jhiTranslate="doctorantApp.extraUser.dateNaissance">Date Naissance</span></th>
+          <th scope="col"><span jhiTranslate="doctorantApp.extraUser.lieuNaissance">Lieu Naissance</span></th>
+          <th scope="col"><span jhiTranslate="doctorantApp.extraUser.nationalite">Nationalite</span></th>
+          <th scope="col"><span jhiTranslate="doctorantApp.extraUser.adresse">Adresse</span></th>
+          <th scope="col"><span jhiTranslate="doctorantApp.extraUser.numeroTelephone">Numero Telephone</span></th>
+          <th scope="col"><span jhiTranslate="doctorantApp.extraUser.genre">Genre</span></th>
+          <th scope="col"><span jhiTranslate="doctorantApp.extraUser.nomArabe">Nom Arabe</span></th>
+          <th scope="col"><span jhiTranslate="doctorantApp.extraUser.prnomArabe">Prnom Arabe</span></th>
+          <th scope="col"><span jhiTranslate="doctorantApp.extraUser.internalUser">Internal User</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let extraUser of extraUsers; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/extra-user', extraUser.id, 'view']">{{ extraUser.id }}</a>
+          </td>
+          <td>{{ extraUser.cin }}</td>
+          <td>{{ extraUser.dateNaissance }}</td>
+          <td>{{ extraUser.lieuNaissance }}</td>
+          <td>{{ extraUser.nationalite }}</td>
+          <td>{{ extraUser.adresse }}</td>
+          <td>{{ extraUser.numeroTelephone }}</td>
+          <td>{{ extraUser.genre }}</td>
+          <td>{{ extraUser.nomArabe }}</td>
+          <td>{{ extraUser.prnomArabe }}</td>
+          <td>
+            {{ extraUser.internalUser?.id }}
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/extra-user', extraUser.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/extra-user', extraUser.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(extraUser)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

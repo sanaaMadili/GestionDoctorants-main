@@ -1,0 +1,26 @@
+{
+  "doctorantApp": {
+    "formationDoctoranle": {
+      "home": {
+        "title": "FormationDoctoranles",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Formation Doctoranle",
+        "createOrEditLabel": "Créer ou éditer un Formation Doctoranle",
+        "notFound": "Aucun Formation Doctoranle trouvé"
+      },
+      "created": "Un nouveau Formation Doctoranle a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Formation Doctoranle avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Formation Doctoranle avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Formation Doctoranle {{ id }} ?"
+      },
+      "detail": {
+        "title": "Formation Doctoranle"
+      },
+      "id": "ID",
+      "thematique": "Thematique",
+      "description": "Description",
+      "formationSuivie": "Formation Suivie"
+    }
+  }
+}

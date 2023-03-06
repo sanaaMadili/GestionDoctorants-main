@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+    <!--
+        Added the constraints for entity FormationSuivie.
+    -->
+    <changeSet id="20220316122730-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="formation_doctoranle_id"
+                                 baseTableName="formation_suivie"
+                                 constraintName="fk_formation_suivie__formation_doctoranle_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="formation_doctoranle"/>
+
+        <addForeignKeyConstraint baseColumnNames="doctorant_id"
+                                 baseTableName="formation_suivie"
+                                 constraintName="fk_formation_suivie__doctorant_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="doctorant"/>
+    </changeSet>
+</databaseChangeLog>

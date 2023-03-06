@@ -1,0 +1,29 @@
+{
+  "doctorantApp": {
+    "chercheurExterne": {
+      "home": {
+        "title": "ChercheurExternes",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Chercheur Externe",
+        "createOrEditLabel": "Créer ou éditer un Chercheur Externe",
+        "notFound": "Aucun Chercheur Externe trouvé"
+      },
+      "created": "Un nouveau Chercheur Externe a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Chercheur Externe avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Chercheur Externe avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Chercheur Externe {{ id }} ?"
+      },
+      "detail": {
+        "title": "Chercheur Externe"
+      },
+      "id": "ID",
+      "nom": "Nom",
+      "prenom": "Prenom",
+      "email": "Email",
+      "pays": "Pays",
+      "universite": "Universite",
+      "user": "User"
+    }
+  }
+}

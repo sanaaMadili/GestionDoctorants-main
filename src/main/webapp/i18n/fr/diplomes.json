@@ -1,0 +1,23 @@
+{
+  "doctorantApp": {
+    "diplomes": {
+      "home": {
+        "title": "Diplomes",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Diplomes",
+        "createOrEditLabel": "Créer ou éditer un Diplomes",
+        "notFound": "Aucun Diplomes trouvé"
+      },
+      "created": "Un nouveau Diplomes a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Diplomes avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Diplomes avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Diplomes {{ id }} ?"
+      },
+      "detail": {
+        "title": "Diplomes"
+      },
+      "id": "ID"
+    }
+  }
+}

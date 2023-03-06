@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+    <!--
+        Added the constraints for entity ChefEquipe.
+    -->
+    <changeSet id="20220316122726-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="extra_user_id"
+                                 baseTableName="chef_equipe"
+                                 constraintName="fk_chef_equipe__extra_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="extra_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="equipe_id"
+                                 baseTableName="chef_equipe"
+                                 constraintName="fk_chef_equipe__equipe_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="equipe"/>
+    </changeSet>
+</databaseChangeLog>

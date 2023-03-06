@@ -1,0 +1,34 @@
+{
+  "doctorantApp": {
+    "sujet": {
+      "home": {
+        "title": "Sujets",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Sujet",
+        "createOrEditLabel": "Create or edit a Sujet",
+        "notFound": "No Sujets found"
+      },
+      "created": "A new Sujet is created with identifier {{ param }}",
+      "updated": "A Sujet is updated with identifier {{ param }}",
+      "deleted": "A Sujet is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Sujet {{ id }}?"
+      },
+      "detail": {
+        "title": "Sujet"
+      },
+      "id": "ID",
+      "titre": "Titre",
+      "description": "Description",
+      "domaines": "Domaines",
+      "motsCles": "Mots Cles",
+      "context": "Context",
+      "profilRecherchees": "Profil Recherchees",
+      "annee": "Annee",
+      "reference": "Reference",
+      "candidatures": "Candidatures",
+      "coencadrent": "Coencadrent",
+      "encadrent": "Encadrent"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "doctorantApp": {
+    "bourse": {
+      "home": {
+        "title": "Bourses",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Bourse",
+        "createOrEditLabel": "Create or edit a Bourse",
+        "notFound": "No Bourses found"
+      },
+      "created": "A new Bourse is created with identifier {{ param }}",
+      "updated": "A Bourse is updated with identifier {{ param }}",
+      "deleted": "A Bourse is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Bourse {{ id }}?"
+      },
+      "detail": {
+        "title": "Bourse"
+      },
+      "id": "ID",
+      "type": "Type",
+      "doctorant": "Doctorant"
+    }
+  }
+}

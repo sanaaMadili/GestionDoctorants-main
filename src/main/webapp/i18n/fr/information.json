@@ -1,0 +1,15 @@
+{
+  "doctorantApp": {
+    "information": {
+      "home": {
+        "title": "Information",
+        "refreshListLabel": "Actualiser la liste",
+        "notFound": "Aucun Information trouvé"
+      },
+      "detail": {
+        "title": "Information"
+      },
+      "id": "ID"
+    }
+  }
+}

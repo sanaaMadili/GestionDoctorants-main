@@ -1,0 +1,27 @@
+{
+  "doctorantApp": {
+    "chefEquipe": {
+      "home": {
+        "title": "ChefEquipes",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Chef Equipe",
+        "createOrEditLabel": "Créer ou éditer un Chef Equipe",
+        "notFound": "Aucun Chef Equipe trouvé"
+      },
+      "created": "Un nouveau Chef Equipe a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Chef Equipe avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Chef Equipe avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Chef Equipe {{ id }} ?"
+      },
+      "detail": {
+        "title": "Chef Equipe"
+      },
+      "id": "ID",
+      "dateDebut": "Date Debut",
+      "dateFin": "Date Fin",
+      "extraUser": "Extra User",
+      "equipe": "Equipe"
+    }
+  }
+}

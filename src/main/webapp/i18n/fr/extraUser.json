@@ -1,0 +1,35 @@
+{
+  "doctorantApp": {
+    "extraUser": {
+      "home": {
+        "title": "ExtraUsers",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Extra User",
+        "createOrEditLabel": "Créer ou éditer un Extra User",
+        "notFound": "Aucun Extra User trouvé"
+      },
+      "created": "Un nouveau Extra User a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Extra User avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Extra User avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Extra User {{ id }} ?"
+      },
+      "detail": {
+        "title": "Extra User"
+      },
+      "id": "ID",
+      "cin": "Cin",
+      "dateNaissance": "Date Naissance",
+      "lieuNaissance": "Lieu Naissance",
+      "nationalite": "Nationalite",
+      "adresse": "Adresse",
+      "numeroTelephone": "Numero Telephone",
+      "genre": "Genre",
+      "nomArabe": "Nom Arabe",
+      "prnomArabe": "Prnom Arabe",
+      "internalUser": "Internal User",
+      "sujet": "Sujet",
+      "membreEquipe": "Membre Equipe"
+    }
+  }
+}

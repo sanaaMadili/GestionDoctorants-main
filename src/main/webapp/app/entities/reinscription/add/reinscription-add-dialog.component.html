@@ -1,0 +1,17 @@
+<form >
+  <div class="modal-header">
+    <h4 class="modal-title" data-cy="reinscriptionDeleteDialogHeading" >Reinscription</h4>
+
+    <button type="button" class="btn-close" data-dismiss="modal" aria-hidden="true" (click)="cancel()">&times;</button>
+  </div>
+
+  <div class="modal-body">
+    <jhi-reinscription-update></jhi-reinscription-update>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">
+      <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+    </button>
+  </div>
+</form>

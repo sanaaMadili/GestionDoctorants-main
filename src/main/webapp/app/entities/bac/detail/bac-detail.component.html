@@ -1,0 +1,65 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="bac">
+      <h2 data-cy="bacDetailsHeading"><span jhiTranslate="doctorantApp.bac.detail.title">Bac</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ bac.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.bac.serieBac">Serie Bac</span></dt>
+        <dd>
+          <span>{{ bac.serieBac }}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.bac.typeBac">Type Bac</span></dt>
+        <dd>
+          <span>{{ bac.typeBac }}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.bac.anneeObtention">Annee Obtention</span></dt>
+        <dd>
+          <span>{{ bac.anneeObtention }}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.bac.noteBac">Note Bac</span></dt>
+        <dd>
+          <span>{{ bac.noteBac }}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.bac.scanneBac">Scanne Bac</span></dt>
+        <dd>
+          <div *ngIf="bac.scanneBac">
+            <a (click)="openFile(bac.scanneBac, bac.scanneBacContentType)" jhiTranslate="entity.action.open">open</a>
+            {{ bac.scanneBacContentType }}, {{ byteSize(bac.scanneBac) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.bac.mention">Mention</span></dt>
+        <dd>
+          <span>{{ bac.mention }}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.bac.villeObtention">Ville Obtention</span></dt>
+        <dd>
+          <span>{{ bac.villeObtention }}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.bac.doctorant">Doctorant</span></dt>
+        <dd>
+          <div *ngIf="bac.doctorant">
+            <a [routerLink]="['/doctorant', bac.doctorant?.id, 'view']">{{ bac.doctorant?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/bac', bac.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,143 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null" *ngIf="false">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="doctorantApp.bac.serieBac" for="field_serieBac">Serie Bac</label>
+          <input   [readonly]="" type="text" class="form-control" name="serieBac" id="field_serieBac" data-cy="serieBac" formControlName="serieBac" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="doctorantApp.bac.typeBac" for="field_typeBac">Type Bac</label>
+          <select type="text" class="form-control" name="typeBac" id="field_typeBac" data-cy="typeBac" formControlName="typeBac" >
+            <option></option>
+            <option>Bac Techniques</option>
+            <option>Bac Sciences mathématiques A</option>
+            <option>Bac Sciences mathématiques B</option>
+            <option>Bac Sciences Physiques</option>
+            <option>Bac Sciences et Technologies Électriques</option>
+            <option>Bac SVT</option>
+            <option>Autre</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="doctorantApp.bac.anneeObtention" for="field_anneeObtention">Annee Obtention</label>
+          <input
+            type="text"
+            class="form-control"
+            name="anneeObtention"
+            id="field_anneeObtention"
+            data-cy="anneeObtention"
+            formControlName="anneeObtention"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="doctorantApp.bac.noteBac" for="field_noteBac">Note Bac</label>
+          <input type="number" class="form-control" name="noteBac" id="field_noteBac" data-cy="noteBac" formControlName="noteBac" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="doctorantApp.bac.scanneBac" for="field_scanneBac">Scanne Bac</label>
+          <div>
+            <div *ngIf="editForm.get('scanneBac')!.value" class="form-text text-danger clearfix">
+              <a
+                class="pull-start"
+                (click)="openFile(editForm.get('scanneBac')!.value, editForm.get('scanneBacContentType')!.value)"
+                jhiTranslate="entity.action.open"
+                >open</a
+              ><br />
+              <span class="pull-start"
+                >{{ editForm.get('scanneBacContentType')!.value }}, {{ byteSize(editForm.get('scanneBac')!.value) }}</span
+              >
+              <button
+                type="button"
+                (click)="editForm.patchValue({ scanneBac: null }); editForm.patchValue({ scanneBacContentType: null })"
+                class="btn btn-secondary btn-xs pull-end"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_scanneBac"
+              data-cy="scanneBac"
+              (change)="setFileData($event, 'scanneBac', false)"
+              jhiTranslate="entity.action.addblob"
+            />
+          </div>
+          <input type="hidden" class="form-control" name="scanneBac" id="field_scanneBac" data-cy="scanneBac" formControlName="scanneBac" />
+          <input
+            type="hidden"
+            class="form-control"
+            name="scanneBacContentType"
+            id="field_scanneBacContentType"
+            formControlName="scanneBacContentType"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="doctorantApp.bac.mention" for="field_mention">Mention</label>
+          <select type="text" class="form-control" name="mention" id="field_mention" data-cy="mention" formControlName="mention" >
+            <option></option>
+            <option>Trés Bien</option>
+            <option>Bien</option>
+            <option>A Bien</option>
+            <option>Passable</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="doctorantApp.bac.villeObtention" for="field_villeObtention">Ville Obtention</label>
+          <input
+            type="text"
+            class="form-control"
+            name="villeObtention"
+            id="field_villeObtention"
+            data-cy="villeObtention"
+            formControlName="villeObtention"
+          />
+        </div>
+
+        <div class="row mb-3" *ngIf="false">
+          <label class="form-label" jhiTranslate="doctorantApp.bac.doctorant" for="field_doctorant">Doctorant</label>
+          <select class="form-control" id="field_doctorant" data-cy="doctorant" name="doctorant" formControlName="doctorant">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="doctorantOption.id === editForm.get('doctorant')!.value?.id ? editForm.get('doctorant')!.value : doctorantOption"
+              *ngFor="let doctorantOption of doctorantsCollection; trackBy: trackDoctorantById"
+            >
+              {{ doctorantOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+          matStepperNext
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

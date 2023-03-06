@@ -1,0 +1,66 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="publication">
+      <h2 data-cy="publicationDetailsHeading"><span jhiTranslate="doctorantApp.publication.detail.title">Publication</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ publication.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.publication.titre">Titre</span></dt>
+        <dd>
+          <span>{{ publication.titre }}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.publication.date">Date</span></dt>
+        <dd>
+          <span>{{ publication.date }}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.publication.description">Description</span></dt>
+        <dd>
+          <span>{{ publication.description }}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.publication.type">Type</span></dt>
+        <dd>
+          <span>{{ publication.type }}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.publication.article">Article</span></dt>
+        <dd>
+          <div *ngIf="publication.article">
+            <a (click)="openFile(publication.article, publication.articleContentType)" jhiTranslate="entity.action.open">open</a>
+            {{ publication.articleContentType }}, {{ byteSize(publication.article) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.publication.chercheur">Chercheur</span></dt>
+        <dd>
+          <span *ngFor="let chercheur of publication.chercheurs; let last = last"> {{ chercheur.login }}{{ last ? '' : ', ' }} </span>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.publication.chercheurExterne">Chercheur Externe</span></dt>
+        <dd>
+          <span *ngFor="let chercheurExterne of publication.chercheurExternes; let last = last">
+            <a [routerLink]="['/chercheur-externe', chercheurExterne?.id, 'view']">{{ chercheurExterne.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.publication.user">User</span></dt>
+        <dd>
+          <span>{{ publication.user?.login }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/publication', publication.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

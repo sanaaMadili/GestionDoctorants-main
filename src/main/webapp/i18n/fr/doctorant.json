@@ -1,0 +1,45 @@
+{
+  "doctorantApp": {
+    "doctorant": {
+      "home": {
+        "title": "Doctorants",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Doctorant",
+        "createOrEditLabel": "Créer ou éditer un Doctorant",
+        "notFound": "Aucun Doctorant trouvé"
+      },
+      "created": "Un nouveau Doctorant a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Doctorant avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Doctorant avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Doctorant {{ id }} ?"
+      },
+      "detail": {
+        "title": "Doctorant"
+      },
+      "id": "ID",
+      "cne": "Cne",
+      "etatProfessionnel": "Etat Professionnel",
+      "photoCNEPile": "Photo CNE Pile",
+      "photoCNEFace": "Photo CNE Face",
+      "photoCv": "Photo Cv",
+      "anneeInscription": "Annee Inscription",
+      "etatDossier": "Etat Dossier",
+      "cin": "Cin",
+      "dateNaissance": "Date Naissance",
+      "lieuNaissance": "Lieu Naissance",
+      "nationalite": "Nationalite",
+      "adresse": "Adresse",
+      "numeroTelephone": "Numero Telephone",
+      "genre": "Genre",
+      "nomArabe": "Nom Arabe",
+      "prnomArabe": "Prnom Arabe",
+      "sujet": "Sujet",
+      "user": "User",
+      "promotion": "Promotion",
+      "cursus": "Cursus",
+      "formationDoctorant": "Formation Doctorant",
+      "formationSuivie": "Formation Suivie"
+    }
+  }
+}

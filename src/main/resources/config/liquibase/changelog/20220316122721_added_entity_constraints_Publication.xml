@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+    <!--
+        Added the constraints for entity Publication.
+    -->
+    <changeSet id="20220316122721-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="publication_id"
+                                 baseTableName="rel_publication__chercheur"
+                                 constraintName="fk_rel_publication__chercheur__publication_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="publication"/>
+
+        <addForeignKeyConstraint baseColumnNames="chercheur_id"
+                                 baseTableName="rel_publication__chercheur"
+                                 constraintName="fk_rel_publication__chercheur__chercheur_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="publication_id"
+                                 baseTableName="rel_publication__chercheur_externe"
+                                 constraintName="fk_rel_publication__chercheur_externe__publication_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="publication"/>
+
+        <addForeignKeyConstraint baseColumnNames="chercheur_externe_id"
+                                 baseTableName="rel_publication__chercheur_externe"
+                                 constraintName="fk_rel_publication__chercheur_externe__chercheur_externe_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="chercheur_externe"/>
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="publication"
+                                 constraintName="fk_publication__user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,95 @@
+<div>
+  <h2 id="page-heading" data-cy="SujetHeading">
+    <span jhiTranslate="doctorantApp.sujet.home.title">Sujets</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="doctorantApp.sujet.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-sujet"
+        [routerLink]="['/sujet/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="doctorantApp.sujet.home.createLabel"> Create a new Sujet </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="sujets?.length === 0">
+    <span jhiTranslate="doctorantApp.sujet.home.notFound">No sujets found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="sujets && sujets.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span jhiTranslate="doctorantApp.sujet.titre">Titre</span></th>
+          <th scope="col"><span jhiTranslate="doctorantApp.sujet.description">Description</span></th>
+          <th scope="col"><span jhiTranslate="doctorantApp.sujet.domaines">Domaines</span></th>
+          <th scope="col"><span jhiTranslate="doctorantApp.sujet.motsCles">Mots Cles</span></th>
+          <th scope="col"><span jhiTranslate="doctorantApp.sujet.context">Context</span></th>
+          <th scope="col"><span jhiTranslate="doctorantApp.sujet.profilRecherchees">Profil Recherchees</span></th>
+          <th scope="col"><span jhiTranslate="doctorantApp.sujet.annee">Annee</span></th>
+          <th scope="col"><span jhiTranslate="doctorantApp.sujet.reference">Reference</span></th>
+          <th scope="col"><span jhiTranslate="doctorantApp.sujet.candidatures">Candidatures</span></th>
+          <th scope="col"><span jhiTranslate="doctorantApp.sujet.coencadrent">Coencadrent</span></th>
+          <th scope="col"><span jhiTranslate="doctorantApp.sujet.encadrent">Encadrent</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let sujet of sujets; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/sujet', sujet.id, 'view']">{{ sujet.id }}</a>
+          </td>
+          <td>{{ sujet.titre }}</td>
+          <td>{{ sujet.description }}</td>
+          <td>{{ sujet.domaines }}</td>
+          <td>{{ sujet.motsCles }}</td>
+          <td>{{ sujet.context }}</td>
+          <td>{{ sujet.profilRecherchees }}</td>
+          <td>{{ sujet.annee }}</td>
+          <td>{{ sujet.reference }}</td>
+          <td>{{ sujet.candidatures }}</td>
+          <td>
+            <div *ngIf="sujet.coencadrent">
+              <a [routerLink]="['/extra-user', sujet.coencadrent?.id, 'view']">{{ sujet.coencadrent?.nomArabe }}</a>
+            </div>
+          </td>          <td>
+            <div *ngIf="sujet.encadrent">
+              <a [routerLink]="['/extra-user', sujet.encadrent?.id, 'view']">{{ sujet.encadrent?.nomArabe }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/sujet', sujet.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/sujet', sujet.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(sujet)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

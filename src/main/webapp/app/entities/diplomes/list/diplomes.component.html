@@ -1,0 +1,21 @@
+<div>
+  <h2 id="page-heading" data-cy="DiplomesHeading">
+    <span>Diplomes</span>
+  </h2>
+
+  <mat-horizontal-stepper>
+    <mat-step [editable]="editable">
+      <ng-template matStepLabel>
+        Bac
+      </ng-template>
+       <jhi-bac-update></jhi-bac-update>
+    </mat-step>
+
+    <mat-step *ngFor="let f of formations" label="{{f.nom}}" [editable]="editable">
+      <jhi-formation-doctorant-update [formationd]="f"></jhi-formation-doctorant-update>
+    </mat-step>
+
+
+  </mat-horizontal-stepper>
+
+</div>

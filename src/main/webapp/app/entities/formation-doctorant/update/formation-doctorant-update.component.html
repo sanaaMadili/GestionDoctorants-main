@@ -1,0 +1,228 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null" *ngIf="false">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="doctorantApp.formationDoctorant.specialite" for="field_specialite">Specialite</label>
+          <input
+            type="text"
+            class="form-control"
+            name="specialite"
+            id="field_specialite"
+            data-cy="specialite"
+            formControlName="specialite"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="doctorantApp.formationDoctorant.type" for="field_type">Type</label>
+          <input type="text" class="form-control" name="type" id="field_type" data-cy="type" formControlName="type" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="doctorantApp.formationDoctorant.dateObtention" for="field_dateObtention"
+          >Date Obtention</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="dateObtention"
+            id="field_dateObtention"
+            data-cy="dateObtention"
+            formControlName="dateObtention"
+          />
+        </div>
+
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="doctorantApp.formationDoctorant.scanneDiplome" for="field_scanneDiplome"
+          >Scanne Diplome</label
+          >
+          <div>
+            <div *ngIf="editForm.get('scanneDiplome')!.value" class="form-text text-danger clearfix">
+              <a
+                class="pull-start"
+                (click)="openFile(editForm.get('scanneDiplome')!.value, editForm.get('scanneDiplomeContentType')!.value)"
+                jhiTranslate="entity.action.open"
+              >open</a
+              ><br />
+              <span class="pull-start"
+              >{{ editForm.get('scanneDiplomeContentType')!.value }}, {{ byteSize(editForm.get('scanneDiplome')!.value) }}</span
+              >
+              <button
+                type="button"
+                (click)="editForm.patchValue({ scanneDiplome: null }); editForm.patchValue({ scanneDiplomeContentType: null })"
+                class="btn btn-secondary btn-xs pull-end"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_scanneDiplome"
+              data-cy="scanneDiplome"
+              (change)="setFileData($event, 'scanneDiplome', false)"
+              jhiTranslate="entity.action.addblob"
+            />
+          </div>
+          <input
+            type="hidden"
+            class="form-control"
+            name="scanneDiplome"
+            id="field_scanneDiplome"
+            data-cy="scanneDiplome"
+            formControlName="scanneDiplome"
+          />
+          <input
+            type="hidden"
+            class="form-control"
+            name="scanneDiplomeContentType"
+            id="field_scanneDiplomeContentType"
+            formControlName="scanneDiplomeContentType"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="doctorantApp.formationDoctorant.mention" for="field_mention">Mention</label>
+          <select type="text" class="form-control" name="mention" id="field_mention" data-cy="mention" formControlName="mention" >
+          <option></option>
+          <option>Trés Bien</option>
+          <option>Bien</option>
+          <option>A Bien</option>
+          <option>Passable</option>
+          </select>
+        </div>
+
+        <div class="row mb-3" *ngIf="false">
+          <label class="form-label" jhiTranslate="doctorantApp.formationDoctorant.formation" for="field_formation">Formation</label>
+          <select class="form-control" id="field_formation" data-cy="formation" name="formation" formControlName="formation">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="formationOption.id === editForm.get('formation')!.value?.id ? editForm.get('formation')!.value : formationOption"
+              *ngFor="let formationOption of formationsSharedCollection; trackBy: trackFormationById"
+            >
+              {{ formationOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3" *ngIf="false">
+          <label class="form-label" jhiTranslate="doctorantApp.formationDoctorant.doctorant" for="field_doctorant">Doctorant</label>
+          <select class="form-control" id="field_doctorant" data-cy="doctorant" name="doctorant" formControlName="doctorant">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="doctorantOption.id === editForm.get('doctorant')!.value?.id ? editForm.get('doctorant')!.value : doctorantOption"
+              *ngFor="let doctorantOption of doctorantsSharedCollection; trackBy: trackDoctorantById"
+            >
+              {{ doctorantOption.id }}
+            </option>
+          </select>
+        </div>
+        <div class="table-responsive" id="entities" >
+          <table class="table table-bordered" aria-describedby="page-heading">
+            <thead>
+            <tr>
+              <th scope="col" >
+                <span ></span>
+              </th>
+              <th scope="col" >
+                <span >Note</span>
+              </th>
+
+              <th  scope="col">
+              <span >Relevé de note</span>
+            </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr data-cy="entityTable" *ngFor="let i of [].constructor(n); let r = index" >
+              <th scope="row" >Annee{{r+1}}</th>
+              <td>
+                <div class="row mb-3" style="padding-left: 2em;">
+                  <input style="width: 60px;" type="number" class="form-control" name="note{{r+1}}" id="field_note{{r+1}}" data-cy="'note2" formControlName="note{{r+1}}" />
+                </div>
+              </td>
+              <td>
+                <div class="row mb-3">
+                  <div>
+                    <div *ngIf="editForm.get('scanneNote2' )!.value" class="form-text text-danger clearfix">
+                      <a
+                        class="pull-start"
+                        (click)="openFile(editForm.get('scanneNote2' )!.value, editForm.get('scanneNote2ContentType')!.value)"
+                        jhiTranslate="entity.action.open"
+                      >open</a
+                      ><br />
+                      <span class="pull-start"
+                      >{{ editForm.get('scanneNote2ContentType')!.value }}, {{ byteSize(editForm.get('scanneNote2' )!.value) }}</span
+                      >
+                      <button
+                        type="button"
+                        (click)="editForm.patchValue({ scanneNote  : null }); editForm.patchValue({ scanneNoteContentType: null })"
+                        class="btn btn-secondary btn-xs pull-end"
+                      >
+                        <fa-icon icon="times"></fa-icon>
+                      </button>
+
+                    </div>
+                    <input
+                      type="file"
+                      id="file_scanneNote"
+                      data-cy="scanneNote2"
+                      (change)="setFileData($event, 'scanneNote'+(r+1), false)"
+                      jhiTranslate="entity.action.addblob"
+                    />
+                  </div>
+                  <input
+                    type="hidden"
+                    class="form-control"
+                    name="scanneNote2"
+                    id="field_scanneNote2"
+                    data-cy="scanneNote2"
+                    formControlName="scanneNote2"
+                  />
+                  <input
+                    type="hidden"
+                    class="form-control"
+                    name="scanneNote2ContentType"
+                    id="field_scanneNote2ContentType"
+                    formControlName="scanneNote2ContentType"
+                  />
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+          matStepperNext
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>

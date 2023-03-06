@@ -1,0 +1,53 @@
+{
+  "applications": "*",
+  "changelogDate": "20220316122717",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "bac",
+  "fields": [
+    {
+      "fieldName": "serieBac",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "typeBac",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "anneeObtention",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "noteBac",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "scanneBac",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    },
+    {
+      "fieldName": "mention",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "villeObtention",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Bac",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "doctorant",
+      "otherEntityRelationshipName": "bac",
+      "ownerSide": true,
+      "relationshipName": "doctorant",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "service": "no"
+}

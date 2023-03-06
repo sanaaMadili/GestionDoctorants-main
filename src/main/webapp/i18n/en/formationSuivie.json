@@ -1,0 +1,29 @@
+{
+  "doctorantApp": {
+    "formationSuivie": {
+      "home": {
+        "title": "Formation Suivies",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Formation Suivie",
+        "createOrEditLabel": "Create or edit a Formation Suivie",
+        "notFound": "No Formation Suivies found"
+      },
+      "created": "A new Formation Suivie is created with identifier {{ param }}",
+      "updated": "A Formation Suivie is updated with identifier {{ param }}",
+      "deleted": "A Formation Suivie is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Formation Suivie {{ id }}?"
+      },
+      "detail": {
+        "title": "Formation Suivie"
+      },
+      "id": "ID",
+      "duree": "Duree",
+      "attestation": "Attestation",
+      "date": "Date",
+      "titre": "Titre",
+      "formationDoctoranle": "Formation Doctoranle",
+      "doctorant": "Doctorant"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "doctorantApp": {
+    "chercheurExterne": {
+      "home": {
+        "title": "Chercheur Externes",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Chercheur Externe",
+        "createOrEditLabel": "Create or edit a Chercheur Externe",
+        "notFound": "No Chercheur Externes found"
+      },
+      "created": "A new Chercheur Externe is created with identifier {{ param }}",
+      "updated": "A Chercheur Externe is updated with identifier {{ param }}",
+      "deleted": "A Chercheur Externe is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Chercheur Externe {{ id }}?"
+      },
+      "detail": {
+        "title": "Chercheur Externe"
+      },
+      "id": "ID",
+      "nom": "Nom",
+      "prenom": "Prenom",
+      "email": "Email",
+      "pays": "Pays",
+      "universite": "Universite",
+      "user": "User"
+    }
+  }
+}

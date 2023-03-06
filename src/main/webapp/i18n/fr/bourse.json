@@ -1,0 +1,25 @@
+{
+  "doctorantApp": {
+    "bourse": {
+      "home": {
+        "title": "Bourses",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Bourse",
+        "createOrEditLabel": "Créer ou éditer un Bourse",
+        "notFound": "Aucun Bourse trouvé"
+      },
+      "created": "Un nouveau Bourse a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Bourse avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Bourse avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Bourse {{ id }} ?"
+      },
+      "detail": {
+        "title": "Bourse"
+      },
+      "id": "ID",
+      "type": "Type",
+      "doctorant": "Doctorant"
+    }
+  }
+}

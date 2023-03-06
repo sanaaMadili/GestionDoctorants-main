@@ -1,0 +1,80 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-equipe-heading" data-cy="EquipeCreateUpdateHeading" jhiTranslate="doctorantApp.equipe.home.createOrEditLabel">
+        Create or edit a Equipe
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="doctorantApp.equipe.nom" for="field_nom">Nom</label>
+          <input type="text" class="form-control" name="nom" id="field_nom" data-cy="nom" formControlName="nom" />
+          <div *ngIf="editForm.get('nom')!.invalid && (editForm.get('nom')!.dirty || editForm.get('nom')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('nom')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="doctorantApp.equipe.abreviation" for="field_abreviation">Abreviation</label>
+          <input
+            type="text"
+            class="form-control"
+            name="abreviation"
+            id="field_abreviation"
+            data-cy="abreviation"
+            formControlName="abreviation"
+          />
+          <div *ngIf="editForm.get('abreviation')!.invalid && (editForm.get('abreviation')!.dirty || editForm.get('abreviation')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('abreviation')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="doctorantApp.equipe.laboratoire" for="field_laboratoire">Laboratoire</label>
+          <select class="form-control" id="field_laboratoire" data-cy="laboratoire" name="laboratoire" formControlName="laboratoire">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                laboratoireOption.id === editForm.get('laboratoire')!.value?.id ? editForm.get('laboratoire')!.value : laboratoireOption
+              "
+              *ngFor="let laboratoireOption of laboratoiresSharedCollection; trackBy: trackLaboratoireById"
+            >
+              {{ laboratoireOption.nom }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

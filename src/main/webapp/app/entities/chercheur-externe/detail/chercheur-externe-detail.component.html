@@ -1,0 +1,54 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="chercheurExterne">
+      <h2 data-cy="chercheurExterneDetailsHeading">
+        <span jhiTranslate="doctorantApp.chercheurExterne.detail.title">Chercheur Externe</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ chercheurExterne.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.chercheurExterne.nom">Nom</span></dt>
+        <dd>
+          <span>{{ chercheurExterne.nom }}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.chercheurExterne.prenom">Prenom</span></dt>
+        <dd>
+          <span>{{ chercheurExterne.prenom }}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.chercheurExterne.email">Email</span></dt>
+        <dd>
+          <span>{{ chercheurExterne.email }}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.chercheurExterne.pays">Pays</span></dt>
+        <dd>
+          <span>{{ chercheurExterne.pays }}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.chercheurExterne.universite">Universite</span></dt>
+        <dd>
+          <span>{{ chercheurExterne.universite }}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.chercheurExterne.user">User</span></dt>
+        <dd>
+          <span>{{ chercheurExterne.user?.login }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/chercheur-externe', chercheurExterne.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

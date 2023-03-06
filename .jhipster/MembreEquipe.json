@@ -1,0 +1,38 @@
+{
+  "applications": "*",
+  "changelogDate": "20220316122724",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "membre_equipe",
+  "fields": [
+    {
+      "fieldName": "dateDebut",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "datefin",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "MembreEquipe",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "equipe",
+      "otherEntityRelationshipName": "membreEquipe",
+      "relationshipName": "equipe",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "extraUser",
+      "otherEntityRelationshipName": "membreEquipe",
+      "relationshipName": "extraUser",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

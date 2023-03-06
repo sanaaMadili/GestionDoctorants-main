@@ -1,0 +1,198 @@
+<div class="d-flex justify-content-center" >
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-publication-heading"
+        data-cy="PublicationCreateUpdateHeading"
+      >
+        Créer ou modifier une publication
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="doctorantApp.publication.titre" for="field_titre">Titre</label>
+          <input type="text" class="form-control" name="titre" id="field_titre" data-cy="titre" formControlName="titre" />
+          <div *ngIf="editForm.get('titre')!.invalid && (editForm.get('titre')!.dirty || editForm.get('titre')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('titre')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="doctorantApp.publication.date" for="field_date">Date</label>
+          <input type="number" class="form-control" name="date" id="field_date" data-cy="date" formControlName="date" />
+          <div *ngIf="editForm.get('date')!.invalid && (editForm.get('date')!.dirty || editForm.get('date')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('date')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('date')?.errors?.number" jhiTranslate="entity.validation.number">
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="doctorantApp.publication.description" for="field_description">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          />
+          <div *ngIf="editForm.get('description')!.invalid && (editForm.get('description')!.dirty || editForm.get('description')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('description')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <label class="form-label" jhiTranslate="doctorantApp.publication.type" for="field_type">Type</label>
+        <select class="form-control" name="type" id="field_type" data-cy="type" formControlName="type">
+          <option ngValue="Journal">Journal</option>
+          <option ngValue="Conférence">Conférence</option>
+          <option ngValue="Communication Orale">Communication Orale</option>
+          <option ngValue="Ouvrage">Ouvrage</option>
+          <option ngValue="Revue">Revue</option>
+          <option ngValue="Autre">Autre</option>
+
+        </select>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="doctorantApp.publication.article" for="field_article">Article</label>
+          <div>
+            <div *ngIf="editForm.get('article')!.value" class="form-text text-danger clearfix">
+              <a
+                class="pull-start"
+                (click)="openFile(editForm.get('article')!.value, editForm.get('articleContentType')!.value)"
+                jhiTranslate="entity.action.open"
+                >open</a
+              ><br />
+              <span class="pull-start"
+                >{{ editForm.get('articleContentType')!.value }}, {{ byteSize(editForm.get('article')!.value) }}</span
+              >
+              <button
+                type="button"
+                (click)="editForm.patchValue({ article: null }); editForm.patchValue({ articleContentType: null })"
+                class="btn btn-secondary btn-xs pull-end"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_article"
+              data-cy="article"
+              (change)="setFileData($event, 'article', false)"
+              jhiTranslate="entity.action.addblob"
+            />
+          </div>
+          <input type="hidden" class="form-control" name="article" id="field_article" data-cy="article" formControlName="article" />
+          <input
+            type="hidden"
+            class="form-control"
+            name="articleContentType"
+            id="field_articleContentType"
+            formControlName="articleContentType"
+          />
+        </div>
+
+        <div class="row mb-3" >
+          <label for="field_chercheurs">Co-auteur</label>
+          <select class="form-control" id="field_chercheurs" data-cy="chercheur" multiple name="chercheurs" formControlName="chercheurs">
+            <option
+              [ngValue]="getSelectedUser(userOption, editForm.get('chercheurs')!.value)"
+              *ngFor="let userOption of usersSharedCollection; trackBy: trackUserById"
+            >
+              {{ userOption.login }}
+            </option>
+          </select>
+        </div>
+        <div >
+        <button type="button" class="btn btn-primary me-5" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          Ajouter un co-auteur externe
+        </button>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title text-danger" id="exampleModalLabel">        Ajouter un co-auteur externe
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <jhi-chercheur-externe-update></jhi-chercheur-externe-update>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+<br>
+        <div class="row mb-3" *ngIf="chercheurExternesSharedCollection.length>0">
+          <label for="field_chercheurExternes">Co-auteur externe</label>
+          <select
+            class="form-control"
+            id="field_chercheurExternes"
+            data-cy="chercheurExterne"
+            multiple
+            name="chercheurExternes"
+            formControlName="chercheurExternes"
+
+          >
+            <option
+              [ngValue]="getSelectedChercheurExterne(chercheurExterneOption, editForm.get('chercheurExternes')!.value)"
+              *ngFor="let chercheurExterneOption of chercheurExternesSharedCollection; trackBy: trackChercheurExterneById"
+            >
+              {{ chercheurExterneOption.nom }} {{chercheurExterneOption.prenom}}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3" *ngIf="false">
+          <label class="form-label" jhiTranslate="doctorantApp.publication.user" for="field_user">User</label>
+          <select class="form-control" id="field_user" data-cy="user" name="user" formControlName="user">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="userOption.id === editForm.get('user')!.value?.id ? editForm.get('user')!.value : userOption"
+              *ngFor="let userOption of usersSharedCollection; trackBy: trackUserById"
+            >
+              {{ userOption.firstName }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+<div *jhiHasAnyAuthority="'ROLE_USER'">
+<div class="d-flex justify-content-center" *ngIf="doctorant.etatDossier==0 || doctorant.etatDossier==null ">
+  <p style="color: #ff0000"> Votre dossier est en cours de traitement ....</p>
+</div>
+</div>

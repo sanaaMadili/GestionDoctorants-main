@@ -1,0 +1,232 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-extra-user-heading" data-cy="ExtraUserCreateUpdateHeading" jhiTranslate="doctorantApp.extraUser.home.createOrEditLabel">
+        Create or edit a Extra User
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="doctorantApp.extraUser.cin" for="field_cin">Cin</label>
+          <input type="text" class="form-control" name="cin" id="field_cin" data-cy="cin" formControlName="cin" />
+          <div *ngIf="editForm.get('cin')!.invalid && (editForm.get('cin')!.dirty || editForm.get('cin')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('cin')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="doctorantApp.extraUser.dateNaissance" for="field_dateNaissance">Date Naissance</label>
+          <div class="d-flex">
+            <input
+              id="field_dateNaissance"
+              data-cy="dateNaissance"
+              type="datetime-local"
+              class="form-control"
+              name="dateNaissance"
+              formControlName="dateNaissance"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          <div
+            *ngIf="
+              editForm.get('dateNaissance')!.invalid && (editForm.get('dateNaissance')!.dirty || editForm.get('dateNaissance')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('dateNaissance')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('dateNaissance')?.errors?.ZonedDateTimelocal"
+              jhiTranslate="entity.validation.ZonedDateTimelocal"
+            >
+              This field should be a date and time.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="doctorantApp.extraUser.lieuNaissance" for="field_lieuNaissance">Lieu Naissance</label>
+          <input
+            type="text"
+            class="form-control"
+            name="lieuNaissance"
+            id="field_lieuNaissance"
+            data-cy="lieuNaissance"
+            formControlName="lieuNaissance"
+          />
+          <div
+            *ngIf="
+              editForm.get('lieuNaissance')!.invalid && (editForm.get('lieuNaissance')!.dirty || editForm.get('lieuNaissance')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('lieuNaissance')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="doctorantApp.extraUser.nationalite" for="field_nationalite">Nationalite</label>
+          <input
+            type="text"
+            class="form-control"
+            name="nationalite"
+            id="field_nationalite"
+            data-cy="nationalite"
+            formControlName="nationalite"
+          />
+          <div *ngIf="editForm.get('nationalite')!.invalid && (editForm.get('nationalite')!.dirty || editForm.get('nationalite')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('nationalite')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="doctorantApp.extraUser.adresse" for="field_adresse">Adresse</label>
+          <input type="text" class="form-control" name="adresse" id="field_adresse" data-cy="adresse" formControlName="adresse" />
+          <div *ngIf="editForm.get('adresse')!.invalid && (editForm.get('adresse')!.dirty || editForm.get('adresse')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('adresse')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="doctorantApp.extraUser.numeroTelephone" for="field_numeroTelephone"
+            >Numero Telephone</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="numeroTelephone"
+            id="field_numeroTelephone"
+            data-cy="numeroTelephone"
+            formControlName="numeroTelephone"
+          />
+          <div
+            *ngIf="
+              editForm.get('numeroTelephone')!.invalid &&
+              (editForm.get('numeroTelephone')!.dirty || editForm.get('numeroTelephone')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('numeroTelephone')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('numeroTelephone')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="doctorantApp.extraUser.genre" for="field_genre">Genre</label>
+          <input type="text" class="form-control" name="genre" id="field_genre" data-cy="genre" formControlName="genre" />
+          <div *ngIf="editForm.get('genre')!.invalid && (editForm.get('genre')!.dirty || editForm.get('genre')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('genre')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="doctorantApp.extraUser.nomArabe" for="field_nomArabe">Nom Arabe</label>
+          <input type="text" class="form-control" name="nomArabe" id="field_nomArabe" data-cy="nomArabe" formControlName="nomArabe" />
+          <div *ngIf="editForm.get('nomArabe')!.invalid && (editForm.get('nomArabe')!.dirty || editForm.get('nomArabe')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('nomArabe')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="doctorantApp.extraUser.prnomArabe" for="field_prnomArabe">Prnom Arabe</label>
+          <input
+            type="text"
+            class="form-control"
+            name="prnomArabe"
+            id="field_prnomArabe"
+            data-cy="prnomArabe"
+            formControlName="prnomArabe"
+          />
+          <div *ngIf="editForm.get('prnomArabe')!.invalid && (editForm.get('prnomArabe')!.dirty || editForm.get('prnomArabe')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('prnomArabe')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="doctorantApp.extraUser.internalUser" for="field_internalUser">Internal User</label>
+          <select class="form-control" id="field_internalUser" data-cy="internalUser" name="internalUser" formControlName="internalUser">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="userOption.id === editForm.get('internalUser')!.value?.id ? editForm.get('internalUser')!.value : userOption"
+              *ngFor="let userOption of usersSharedCollection; trackBy: trackUserById"
+            >
+              {{ userOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

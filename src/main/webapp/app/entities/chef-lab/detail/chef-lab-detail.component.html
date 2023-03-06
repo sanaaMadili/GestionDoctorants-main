@@ -1,0 +1,48 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="chefLab">
+      <h2 data-cy="chefLabDetailsHeading"><span jhiTranslate="doctorantApp.chefLab.detail.title">Chef Lab</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ chefLab.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.chefLab.dateDebut">Date Debut</span></dt>
+        <dd>
+          <span>{{ chefLab.dateDebut | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.chefLab.dateFin">Date Fin</span></dt>
+        <dd>
+          <span>{{ chefLab.dateFin | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.chefLab.extraUser">Extra User</span></dt>
+        <dd>
+          <div *ngIf="chefLab.extraUser">
+            <a [routerLink]="['/extra-user', chefLab.extraUser?.id, 'view']">{{ chefLab.extraUser?.cin }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.chefLab.laboratoire">Laboratoire</span></dt>
+        <dd>
+          <div *ngIf="chefLab.laboratoire">
+            <a [routerLink]="['/laboratoire', chefLab.laboratoire?.id, 'view']">{{ chefLab.laboratoire?.nom }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/chef-lab', chefLab.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

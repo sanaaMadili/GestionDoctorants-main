@@ -1,0 +1,66 @@
+{
+  "applications": "*",
+  "changelogDate": "20220316122722",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "sujet",
+  "fields": [
+    {
+      "fieldName": "titre",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "domaines",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "motsCles",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "context",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "profilRecherchees",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "annee",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "reference",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "candidatures",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "coencadrent",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Sujet",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "extraUser",
+      "otherEntityRelationshipName": "sujet",
+      "relationshipName": "encadrent",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

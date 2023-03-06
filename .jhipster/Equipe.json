@@ -1,0 +1,40 @@
+{
+  "applications": "*",
+  "changelogDate": "20220316122719",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "equipe",
+  "fields": [
+    {
+      "fieldName": "nom",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "abreviation",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Equipe",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "nom",
+      "otherEntityName": "laboratoire",
+      "otherEntityRelationshipName": "equipe",
+      "relationshipName": "laboratoire",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "membreEquipe",
+      "otherEntityRelationshipName": "equipe",
+      "relationshipName": "membreEquipe",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "no"
+}

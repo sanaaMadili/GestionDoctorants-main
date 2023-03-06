@@ -1,0 +1,81 @@
+<div>
+  <h2 id="page-heading" data-cy="BourseHeading">
+    <span jhiTranslate="doctorantApp.bourse.home.title">Bourses</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="doctorantApp.bourse.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-bourse"
+        [routerLink]="['/bourse/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span>Créer une bourse  </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="bourses?.length === 0">
+    <span jhiTranslate="doctorantApp.bourse.home.notFound">No bourses found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="bourses && bourses.length > 0">
+    <table class="table table-striped" datatable [dtOptions]="dtOptions" aria-describedby="page-heading">
+      <thead>
+      <tr>
+        <th scope="col"><span >CIN</span></th>
+        <th scope="col"><span >CNE PILE</span></th>
+        <th scope="col"><span >CNE FACE</span></th>
+        <th scope="col"><span >TYPE DE BOURSE</span></th>
+        <th scope="col"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let bourse of bourses; trackBy: trackId" data-cy="entityTable">
+        <td>
+          <div *ngIf="bourse.doctorant">
+            <a [routerLink]="['/doctorant', bourse.doctorant?.id, 'view']">{{ bourse.doctorant?.cne }}</a>
+          </div>
+        </td>
+        <td *ngIf="bourse.doctorant">
+          <img *ngIf="bourse.doctorant.photoCNEPile" [src]="decode(bourse.doctorant.photoCNEPile)" height="100" width="=100">
+        </td>
+        <td *ngIf="bourse.doctorant">
+          <img *ngIf="bourse.doctorant.photoCNEFace" [src]="decode(bourse.doctorant.photoCNEFace)" height="100" width="=100">
+        </td>
+
+
+
+        <td>{{ bourse.type }}</td>
+        <td class="text-end">
+          <div class="btn-group">
+            <button type="submit" [routerLink]="['/bourse', bourse.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+              <fa-icon icon="eye"></fa-icon>
+              <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+            </button>
+
+            <button type="submit" [routerLink]="['/bourse', bourse.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+              <fa-icon icon="pencil-alt"></fa-icon>
+              <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+
+            <button type="submit" (click)="delete(bourse)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+              <fa-icon icon="times"></fa-icon>
+              <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+            </button>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

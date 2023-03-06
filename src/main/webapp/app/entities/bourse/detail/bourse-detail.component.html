@@ -1,0 +1,38 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="bourse">
+      <h2 data-cy="bourseDetailsHeading"><span jhiTranslate="doctorantApp.bourse.detail.title">Bourse</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ bourse.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.bourse.type">Type</span></dt>
+        <dd>
+          <span>{{ bourse.type }}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.bourse.doctorant">Doctorant</span></dt>
+        <dd>
+          <div *ngIf="bourse.doctorant">
+            <a [routerLink]="['/doctorant', bourse.doctorant?.id, 'view']">{{ bourse.doctorant?.cne }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/bourse', bourse.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

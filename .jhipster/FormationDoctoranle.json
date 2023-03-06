@@ -1,0 +1,32 @@
+{
+  "applications": "*",
+  "changelogDate": "20220316122729",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "formation_doctoranle",
+  "fields": [
+    {
+      "fieldName": "thematique",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "FormationDoctoranle",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "formationSuivie",
+      "otherEntityRelationshipName": "formationDoctoranle",
+      "relationshipName": "formationSuivie",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "no"
+}

@@ -1,0 +1,29 @@
+{
+  "doctorantApp": {
+    "formationSuivie": {
+      "home": {
+        "title": "FormationSuivies",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Formation Suivie",
+        "createOrEditLabel": "Créer ou éditer un Formation Suivie",
+        "notFound": "Aucun Formation Suivie trouvé"
+      },
+      "created": "Un nouveau Formation Suivie a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Formation Suivie avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Formation Suivie avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Formation Suivie {{ id }} ?"
+      },
+      "detail": {
+        "title": "Formation Suivie"
+      },
+      "id": "ID",
+      "duree": "Duree",
+      "attestation": "Attestation",
+      "date": "Date",
+      "titre": "Titre",
+      "formationDoctoranle": "Formation Doctoranle",
+      "doctorant": "Doctorant"
+    }
+  }
+}

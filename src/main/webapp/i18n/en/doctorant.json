@@ -1,0 +1,45 @@
+{
+  "doctorantApp": {
+    "doctorant": {
+      "home": {
+        "title": "Doctorants",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Doctorant",
+        "createOrEditLabel": "Create or edit a Doctorant",
+        "notFound": "No Doctorants found"
+      },
+      "created": "A new Doctorant is created with identifier {{ param }}",
+      "updated": "A Doctorant is updated with identifier {{ param }}",
+      "deleted": "A Doctorant is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Doctorant {{ id }}?"
+      },
+      "detail": {
+        "title": "Doctorant"
+      },
+      "id": "ID",
+      "cne": "Cne",
+      "etatProfessionnel": "Etat Professionnel",
+      "photoCNEPile": "Photo CNE Pile",
+      "photoCNEFace": "Photo CNE Face",
+      "photoCv": "Photo Cv",
+      "anneeInscription": "Annee Inscription",
+      "etatDossier": "Etat Dossier",
+      "cin": "Cin",
+      "dateNaissance": "Date Naissance",
+      "lieuNaissance": "Lieu Naissance",
+      "nationalite": "Nationalite",
+      "adresse": "Adresse",
+      "numeroTelephone": "Numero Telephone",
+      "genre": "Genre",
+      "nomArabe": "Nom Arabe",
+      "prnomArabe": "Prnom Arabe",
+      "sujet": "Sujet",
+      "user": "User",
+      "promotion": "Promotion",
+      "cursus": "Cursus",
+      "formationDoctorant": "Formation Doctorant",
+      "formationSuivie": "Formation Suivie"
+    }
+  }
+}

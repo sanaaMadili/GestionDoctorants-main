@@ -1,0 +1,41 @@
+{
+  "doctorantApp": {
+    "formationDoctorant": {
+      "home": {
+        "title": "FormationDoctorants",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Formation Doctorant",
+        "createOrEditLabel": "Créer ou éditer un Formation Doctorant",
+        "notFound": "Aucun Formation Doctorant trouvé"
+      },
+      "created": "Un nouveau Formation Doctorant a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Formation Doctorant avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Formation Doctorant avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Formation Doctorant {{ id }} ?"
+      },
+      "detail": {
+        "title": "Formation Doctorant"
+      },
+      "id": "ID",
+      "specialite": "Specialite",
+      "type": "Type",
+      "dateObtention": "Date Obtention",
+      "note1": "Note 1",
+      "scanneNote1": "Scanne Note 1",
+      "note2": "Note 2",
+      "scanneNote2": "Scanne Note 2",
+      "note3": "Note 3",
+      "scanneNote3": "Scanne Note 3",
+      "note4": "Note 4",
+      "scanneNote4": "Scanne Note 4",
+      "note5": "Note 5",
+      "scanneNote5": "Scanne Note 5",
+      "scanneDiplome": "Scanne Diplome",
+      "mention": "Mention",
+      "formation": "Formation",
+      "doctorant": "Doctorant",
+      "etablissement": "Etablissement"
+    }
+  }
+}

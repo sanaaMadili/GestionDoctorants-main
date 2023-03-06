@@ -1,0 +1,27 @@
+{
+  "doctorantApp": {
+    "chefLab": {
+      "home": {
+        "title": "ChefLabs",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Chef Lab",
+        "createOrEditLabel": "Créer ou éditer un Chef Lab",
+        "notFound": "Aucun Chef Lab trouvé"
+      },
+      "created": "Un nouveau Chef Lab a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Chef Lab avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Chef Lab avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Chef Lab {{ id }} ?"
+      },
+      "detail": {
+        "title": "Chef Lab"
+      },
+      "id": "ID",
+      "dateDebut": "Date Debut",
+      "dateFin": "Date Fin",
+      "extraUser": "Extra User",
+      "laboratoire": "Laboratoire"
+    }
+  }
+}

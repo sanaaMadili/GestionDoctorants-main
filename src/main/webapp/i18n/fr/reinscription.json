@@ -1,0 +1,28 @@
+{
+  "doctorantApp": {
+    "reinscription": {
+      "home": {
+        "title": "Reinscriptions",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Reinscription",
+        "createOrEditLabel": "Créer ou éditer un Reinscription",
+        "notFound": "Aucun Reinscription trouvé"
+      },
+      "created": "Un nouveau Reinscription a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Reinscription avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Reinscription avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Reinscription {{ id }} ?"
+      },
+      "detail": {
+        "title": "Reinscription"
+      },
+      "id": "ID",
+      "formulaireReinscription": "Formulaire Reinscription",
+      "demande": "Demande",
+      "annee": "Annee",
+      "etablissement": "Etablissement",
+      "doctorant": "Doctorant"
+    }
+  }
+}

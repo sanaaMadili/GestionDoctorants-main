@@ -1,0 +1,37 @@
+{
+  "changelogDate": "20220712015111",
+  "fields": [
+    {
+      "fieldName": "formulaireReinscription",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    },
+    {
+      "fieldName": "demande",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    },
+    {
+      "fieldName": "annee",
+      "fieldType": "Double"
+    }
+  ],
+  "name": "Reinscription",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "id",
+      "otherEntityName": "etablissement",
+      "relationshipName": "etablissement",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "id",
+      "otherEntityName": "doctorant",
+      "relationshipName": "doctorant",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

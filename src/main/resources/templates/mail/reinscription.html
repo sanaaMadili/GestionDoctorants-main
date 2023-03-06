@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.language}" lang="en">
+<head>
+  <title>Reinscription</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Ré-Inscription au Centre des Etudes Doctorales
+  Domaine des Sciences, Technologies et Ingénierie
+  Formation Doctorale : Sciences de l'Ingénieur
+</h1>
+<p>Il est porté à la connaissance des étudiants que la réinscription au CEDoc- UCD, Domaine des Sciences, Technologies et Ingénierie, Formation Doctorale : Sciences de l'Ingénieur a commencé.
+  Veuillez effectuer vos réinscriptions sur la Plateforme de Gestion des Doctorants.     <a th:with="url=(@{|${baseUrl}|})" th:href="${url}" th:text="${url}"> link</a>
+
+
+  On vous souhaite très bon courage.
+  Bonne réception.
+</p>
+</body>
+</html>

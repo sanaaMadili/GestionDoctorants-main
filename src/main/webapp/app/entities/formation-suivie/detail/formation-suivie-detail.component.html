@@ -1,0 +1,65 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="formationSuivie">
+      <h2 data-cy="formationSuivieDetailsHeading">
+        <span jhiTranslate="doctorantApp.formationSuivie.detail.title">Formation Suivie</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ formationSuivie.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.formationSuivie.duree">Duree</span></dt>
+        <dd>
+          <span>{{ formationSuivie.duree }}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.formationSuivie.attestation">Attestation</span></dt>
+        <dd>
+          <div *ngIf="formationSuivie.attestation">
+            <a (click)="openFile(formationSuivie.attestation, formationSuivie.attestationContentType)" jhiTranslate="entity.action.open"
+              >open</a
+            >
+            {{ formationSuivie.attestationContentType }}, {{ byteSize(formationSuivie.attestation) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.formationSuivie.date">Date</span></dt>
+        <dd>
+          <span>{{ formationSuivie.date | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.formationSuivie.titre">Titre</span></dt>
+        <dd>
+          <span>{{ formationSuivie.titre }}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.formationSuivie.formationDoctoranle">Formation Doctoranle</span></dt>
+        <dd>
+          <div *ngIf="formationSuivie.formationDoctoranle">
+            <a [routerLink]="['/formation-doctoranle', formationSuivie.formationDoctoranle?.id, 'view']">{{
+              formationSuivie.formationDoctoranle?.id
+            }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.formationSuivie.doctorant">Doctorant</span></dt>
+        <dd>
+          <div *ngIf="formationSuivie.doctorant">
+            <a [routerLink]="['/doctorant', formationSuivie.doctorant?.id, 'view']">{{ formationSuivie.doctorant?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/formation-suivie', formationSuivie.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

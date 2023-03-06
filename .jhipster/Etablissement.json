@@ -1,0 +1,39 @@
+{
+  "applications": "*",
+  "changelogDate": "20220316122718",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "etablissement",
+  "fields": [
+    {
+      "fieldName": "nom",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "ville",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "universite",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "addresse",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Etablissement",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "formationDoctorant",
+      "otherEntityRelationshipName": "etablissement",
+      "relationshipName": "formationDoctorant",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

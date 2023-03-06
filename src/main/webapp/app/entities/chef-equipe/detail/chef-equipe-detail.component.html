@@ -1,0 +1,48 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="chefEquipe">
+      <h2 data-cy="chefEquipeDetailsHeading"><span jhiTranslate="doctorantApp.chefEquipe.detail.title">Chef Equipe</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ chefEquipe.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.chefEquipe.dateDebut">Date Debut</span></dt>
+        <dd>
+          <span>{{ chefEquipe.dateDebut | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.chefEquipe.dateFin">Date Fin</span></dt>
+        <dd>
+          <span>{{ chefEquipe.dateFin | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.chefEquipe.extraUser">Extra User</span></dt>
+        <dd>
+          <div *ngIf="chefEquipe.extraUser">
+            <a [routerLink]="['/extra-user', chefEquipe.extraUser?.id, 'view']">{{ chefEquipe.extraUser?.cin }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.chefEquipe.equipe">Equipe</span></dt>
+        <dd>
+          <div *ngIf="chefEquipe.equipe">
+            <a [routerLink]="['/equipe', chefEquipe.equipe?.id, 'view']">{{ chefEquipe.equipe?.nom }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/chef-equipe', chefEquipe.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

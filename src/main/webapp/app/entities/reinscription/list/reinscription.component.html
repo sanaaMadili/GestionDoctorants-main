@@ -1,0 +1,112 @@
+<div>
+  <h2 id="page-heading" data-cy="ReinscriptionHeading">
+    <span>Ré-inscriptions</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="doctorantApp.reinscription.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-reinscription"
+        [routerLink]="['/reinscription/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span>Créer une nouvelle ré-inscription </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="reinscriptions?.length === 0">
+    <span jhiTranslate="doctorantApp.reinscription.home.notFound">No reinscriptions found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="reinscriptions && reinscriptions.length > 0">
+    <table class="table table-striped" datatable [dtOptions]="dtOptions" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span>Formulaire de ré-inscription</span></th>
+          <th scope="col"><span jhiTranslate="doctorantApp.reinscription.demande">Demande</span></th>
+          <th scope="col"><span>Année</span></th>
+          <th scope="col"><span jhiTranslate="doctorantApp.reinscription.etablissement">Etablissement</span></th>
+          <th scope="col"><span jhiTranslate="doctorantApp.reinscription.doctorant">Doctorant</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let reinscription of reinscriptions; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/reinscription', reinscription.id, 'view']">{{ reinscription.id }}</a>
+          </td>
+          <td>
+            <a
+              *ngIf="reinscription.formulaireReinscription"
+              (click)="openFile(reinscription.formulaireReinscription, reinscription.formulaireReinscriptionContentType)"
+              jhiTranslate="entity.action.open"
+              >open</a
+            >
+            <span *ngIf="reinscription.formulaireReinscription"
+              >{{ reinscription.formulaireReinscriptionContentType }}, {{ byteSize(reinscription.formulaireReinscription) }}</span
+            >
+          </td>
+          <td>
+            <a
+              *ngIf="reinscription.demande"
+              (click)="openFile(reinscription.demande, reinscription.demandeContentType)"
+              jhiTranslate="entity.action.open"
+              >open</a
+            >
+            <span *ngIf="reinscription.demande">{{ reinscription.demandeContentType }}, {{ byteSize(reinscription.demande) }}</span>
+          </td>
+          <td>{{ reinscription.annee }}</td>
+          <td>
+            <div *ngIf="reinscription.etablissement">
+              <a [routerLink]="['/etablissement', reinscription.etablissement?.id, 'view']">{{ reinscription.etablissement?.nom }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="reinscription.doctorant">
+              <a [routerLink]="['/doctorant', reinscription.doctorant?.id, 'view']">{{ reinscription.doctorant?.cin }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/reinscription', reinscription.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/reinscription', reinscription.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(reinscription)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

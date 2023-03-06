@@ -1,0 +1,62 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="reinscription">
+      <h2 data-cy="reinscriptionDetailsHeading"><span jhiTranslate="doctorantApp.reinscription.detail.title">Reinscription</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ reinscription.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.reinscription.formulaireReinscription">Formulaire Reinscription</span></dt>
+        <dd>
+          <div *ngIf="reinscription.formulaireReinscription">
+            <a
+              (click)="openFile(reinscription.formulaireReinscription, reinscription.formulaireReinscriptionContentType)"
+              jhiTranslate="entity.action.open"
+              >open</a
+            >
+            {{ reinscription.formulaireReinscriptionContentType }}, {{ byteSize(reinscription.formulaireReinscription) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.reinscription.demande">Demande</span></dt>
+        <dd>
+          <div *ngIf="reinscription.demande">
+            <a (click)="openFile(reinscription.demande, reinscription.demandeContentType)" jhiTranslate="entity.action.open">open</a>
+            {{ reinscription.demandeContentType }}, {{ byteSize(reinscription.demande) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.reinscription.annee">Annee</span></dt>
+        <dd>
+          <span>{{ reinscription.annee }}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.reinscription.etablissement">Etablissement</span></dt>
+        <dd>
+          <div *ngIf="reinscription.etablissement">
+            <a [routerLink]="['/etablissement', reinscription.etablissement?.id, 'view']">{{ reinscription.etablissement?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.reinscription.doctorant">Doctorant</span></dt>
+        <dd>
+          <div *ngIf="reinscription.doctorant">
+            <a [routerLink]="['/doctorant', reinscription.doctorant?.id, 'view']">{{ reinscription.doctorant?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/reinscription', reinscription.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

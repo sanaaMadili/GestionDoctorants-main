@@ -1,0 +1,74 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="sujet">
+      <h2 data-cy="sujetDetailsHeading"><span jhiTranslate="doctorantApp.sujet.detail.title">Sujet</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ sujet.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.sujet.titre">Titre</span></dt>
+        <dd>
+          <span>{{ sujet.titre }}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.sujet.description">Description</span></dt>
+        <dd>
+          <span>{{ sujet.description }}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.sujet.domaines">Domaines</span></dt>
+        <dd>
+          <span>{{ sujet.domaines }}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.sujet.motsCles">Mots Cles</span></dt>
+        <dd>
+          <span>{{ sujet.motsCles }}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.sujet.context">Context</span></dt>
+        <dd>
+          <span>{{ sujet.context }}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.sujet.profilRecherchees">Profil Recherchees</span></dt>
+        <dd>
+          <span>{{ sujet.profilRecherchees }}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.sujet.annee">Annee</span></dt>
+        <dd>
+          <span>{{ sujet.annee }}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.sujet.reference">Reference</span></dt>
+        <dd>
+          <span>{{ sujet.reference }}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.sujet.candidatures">Candidatures</span></dt>
+        <dd>
+          <span>{{ sujet.candidatures }}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.sujet.coencadrent">Coencadrent</span></dt>
+        <dd>
+          <span>{{ sujet.coencadrent }}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.sujet.encadrent">Encadrent</span></dt>
+        <dd>
+          <div *ngIf="sujet.encadrent">
+            <a [routerLink]="['/extra-user', sujet.encadrent?.id, 'view']">{{ sujet.encadrent?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/sujet', sujet.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

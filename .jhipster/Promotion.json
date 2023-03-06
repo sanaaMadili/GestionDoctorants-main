@@ -1,0 +1,32 @@
+{
+  "applications": "*",
+  "changelogDate": "20220316122720",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "promotion",
+  "fields": [
+    {
+      "fieldName": "annee",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "nom",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Promotion",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "doctorant",
+      "otherEntityRelationshipName": "promotion",
+      "relationshipName": "doctorant",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "no"
+}

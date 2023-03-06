@@ -1,0 +1,48 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="membreEquipe">
+      <h2 data-cy="membreEquipeDetailsHeading"><span jhiTranslate="doctorantApp.membreEquipe.detail.title">Membre Equipe</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ membreEquipe.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.membreEquipe.dateDebut">Date Debut</span></dt>
+        <dd>
+          <span>{{ membreEquipe.dateDebut | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.membreEquipe.datefin">Datefin</span></dt>
+        <dd>
+          <span>{{ membreEquipe.datefin | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.membreEquipe.equipe">Equipe</span></dt>
+        <dd>
+          <div *ngIf="membreEquipe.equipe">
+            <a [routerLink]="['/equipe', membreEquipe.equipe?.id, 'view']">{{ membreEquipe.equipe?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.membreEquipe.extraUser">Extra User</span></dt>
+        <dd>
+          <div *ngIf="membreEquipe.extraUser">
+            <a [routerLink]="['/extra-user', membreEquipe.extraUser?.id, 'view']">{{ membreEquipe.extraUser?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/membre-equipe', membreEquipe.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

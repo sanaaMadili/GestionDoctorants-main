@@ -1,0 +1,31 @@
+{
+  "doctorantApp": {
+    "bac": {
+      "home": {
+        "title": "Bacs",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Bac",
+        "createOrEditLabel": "Créer ou éditer un Bac",
+        "notFound": "Aucun Bac trouvé"
+      },
+      "created": "Un nouveau Bac a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Bac avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Bac avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Bac {{ id }} ?"
+      },
+      "detail": {
+        "title": "Bac"
+      },
+      "id": "ID",
+      "serieBac": "Serie Bac",
+      "typeBac": "Type Bac",
+      "anneeObtention": "Annee Obtention",
+      "noteBac": "Note Bac",
+      "scanneBac": "Scanne Bac",
+      "mention": "Mention",
+      "villeObtention": "Ville Obtention",
+      "doctorant": "Doctorant"
+    }
+  }
+}

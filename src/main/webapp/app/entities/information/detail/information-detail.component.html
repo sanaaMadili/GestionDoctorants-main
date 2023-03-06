@@ -1,0 +1,259 @@
+<div class="container" *jhiHasAnyAuthority="['ROLE_DIRECTEUR','ROLE_RESPONSABLE']">
+  <div class="row">
+    <div class="col-8">
+      <h1>Dashboard</h1>
+    </div>
+    <hr>
+  </div>
+  <div class="row">
+    <div class="chart-wrapper col-6" style=" width: 600px;" >
+      <canvas baseChart
+              [datasets]="barChartData"
+              [labels]="barChartLabels"
+              [options]="barChartOptions"
+              [plugins]="barChartPlugins"
+              [legend]="barChartLegend"
+              [chartType]="barChartType">
+      </canvas>
+    </div>
+    <div class="chart-wrapper col-6" style=" width: 600px;">
+      <canvas baseChart
+              [datasets]="barChartData2"
+              [labels]="barChartLabels2"
+              [options]="barChartOptions2"
+              [plugins]="barChartPlugins2"
+              [legend]="barChartLegend2"
+              [chartType]="barChartType2">
+      </canvas>
+    </div>
+  </div>
+  <div class="row">
+    <div class="chart-wrapper col-6" style=" width: 550px;">
+      <canvas baseChart
+              [datasets]="lineChartData"
+              [labels]="lineChartLabels"
+              [options]="lineChartOptions"
+              [colors]="lineChartColors"
+              [legend]="lineChartLegend"
+              [chartType]="lineChartType"
+              [plugins]="lineChartPlugins">
+      </canvas>
+
+    </div>
+    <div class="chart-wrapper col-6" style=" width: 550px;">
+      <canvas baseChart
+              [data]="pieChartData"
+              [labels]="pieChartLabels"
+              [chartType]="pieChartType"
+              [options]="pieChartOptions"
+              [plugins]="pieChartPlugins"
+              [legend]="pieChartLegend"
+              [colors]="pieChartColors"
+      ></canvas>
+
+    </div>
+
+    <div class="chart-wrapper col-12" style=" height: 400px;width: 1100px;">
+      <canvas baseChart
+              [datasets]="barChartData3"
+              [labels]="barChartLabels3"
+              [options]="barChartOptions3"
+              [plugins]="barChartPlugins3"
+              [legend]="barChartLegend3"
+              [chartType]="barChartType3">
+      </canvas>
+      <label class="form-label"  >Années</label>
+      <select class="form-control">
+
+        <option ></option>
+        <option >2018</option>
+        <option >2019</option>
+        <option >2020</option>
+        <option >2021</option>
+        <option >2022</option>
+
+
+      </select>
+
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+        <tr>
+          <th scope="col"><span >Pays</span></th>
+          <th scope="col"><span >Annee</span></th>
+          <th scope="col"><span > Nombre de chercheur</span></th>
+        </tr>
+        </thead>
+        <tbody >
+        <tr  data-cy="entityTable"  >
+          <td>Canada</td>
+          <td>2021</td>
+          <td>8</td>
+        </tr>
+
+        <tr  data-cy="entityTable"  >
+          <td>France</td>
+          <td>2021</td>
+          <td>6</td>
+        </tr>
+
+        <tr  data-cy="entityTable"  >
+          <td>USA</td>
+          <td>2021</td>
+          <td>7</td>
+        </tr>
+
+
+
+        </tbody>
+      </table>
+    </div>
+
+
+  </div>
+</div>
+
+<div class="row" *jhiHasAnyAuthority="['ROLE_DOCTORANT','ROLE_USER','ROLE_ADMIN','ROLE_PROFESSEUR']">
+  <div style="text-align: center">
+    <h1 class="display-4"><span>Bienvenue sur la plateforme de gestion des doctorants</span> </h1>
+  </div>
+  <div class="col-md-4" style="vertical-align: middle" >
+
+    <lottie-player src="https://assets5.lottiefiles.com/packages/lf20_j2rjqphu.json" background="transparent"  speed="1"   loop autoplay></lottie-player>
+  </div>
+  <div class="col-md-8">
+    <p class="lead" style="text-justify: auto" >
+      Il s'agit de la nouvelle brique logicielle qui vient enrichir l'Environnement Numérique de Travail de l'ENSAJ.
+
+      Elle constitue la plateforme officielle pour la gestion des candidatures au Cycle Doctorat ainsi que le suivi et la gestion du parcours des Doctorants de l'ENSAJ, de l'inscription à la soutenance.
+    </p>
+    <div class="container">
+      <mat-card style="background-color: #77A6F7">
+        <mat-card-title>Inscription</mat-card-title>
+        <mat-card-content>
+          <mat-accordion>
+            L’accès au cycle doctoral  est ouvert aux titulaires d’un Master/Master spécialisé ou d’un diplôme reconnu équivalent qui répond aux critères d’admission prévus dans le descriptif de demande d’accréditation des formations doctorales.
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>Documents à fournir</mat-expansion-panel-header>
+              <ul>
+                <li>Une demande manuscrite adressée à Monsieur le Directeur de l'ENSAJ;</li>
+                <li>L'original du Baccalauréat ;</li>
+                <li>L'original du diplôme de master ou du diplôme d'ingénieur ou de tout autre
+                  diplôme (Bac+5) équivalent ;</li>
+                <li>Arrêté de l'équivalence pour les diplômes étrangers ;</li>
+                <li>Les relevés de notes obtenues durant tout le cursus universitaire ;</li>
+                <li>Une copie certifiée conforme à l'original de la Carte d'Identité Nationale;</li>
+                <li>Deux photos d'identité récentes;</li>
+                <li>Une attestation de travail pour les fonctionnaires et les salariés/ou une
+                  attestation de non emploi pour les non fonctionnaires et les non-salariés;</li>
+                <li> <a download href="../../../content/charte.pdf">Charte de thèse </a>signée par le doctorant et son encadrant ;</li>
+                <li><a download href="../../../content/FicheInscription.pdf">La fiche d'inscription </a>et <a download href="../../../content/FicheDescriptive.pdf">la fiche descriptive</a> du projet de thèse dûment
+                  rempli et signé par le doctorant et son encadrant ;</li>
+                <li>Reçu d'inscription sur la Plateforme de Gestion des Doctorants.</li>
+              </ul>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </mat-card-content>
+      </mat-card>
+      <mat-card style="background-color: #D3E3FC">
+        <mat-card-title>Réinscription</mat-card-title>
+        <mat-card-content>
+          <mat-accordion>
+            Les réinscriptions au cycle doctoral se feront en ligne du 15 novembre au 04 décembre 2022.
+
+            Il est demandé aussi aux doctorants de déposer leur dossier en version papier au bureau du Cedoc
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>Documents à fournir</mat-expansion-panel-header>
+              <ul>
+                <li><a download href="../../../content/Formulaire.docx">Formulaire de réinscription</a>;</li>
+                <li>Demande adressé au directeur de laboratoire.</li>
+              </ul>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </mat-card-content>
+      </mat-card> <mat-card style="background-color: #FFCCBC">
+      <mat-card-title>Soutenance</mat-card-title>
+      <mat-card-content>
+        <mat-accordion>
+          Deux mois avant la date prévue de la soutenance, le candidat adressera sa demande au Directeur du CEDoc accompagnée des documents nécessaires.
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>Documents à fournir</mat-expansion-panel-header>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </mat-card-content>
+    </mat-card>
+    </div>
+  </div>
+
+</div>
+
+<div class="row" *ngIf="account == null">
+  <div style="text-align: center">
+    <h1 class="display-4"><span>Bienvenue sur la plateforme de gestion des doctorants</span> </h1>
+  </div>
+  <div class="col-md-4" style="vertical-align: middle" >
+
+    <lottie-player src="https://assets5.lottiefiles.com/packages/lf20_j2rjqphu.json" background="transparent"  speed="1"   loop autoplay></lottie-player>
+  </div>
+  <div class="col-md-8">
+    <p class="lead" style="text-justify: auto" >
+      Il s'agit de la nouvelle brique logicielle qui vient enrichir l'Environnement Numérique de Travail de l'ENSAJ.
+
+      Elle constitue la plateforme officielle pour la gestion des candidatures au Cycle Doctorat ainsi que le suivi et la gestion du parcours des Doctorants de l'ENSAJ, de l'inscription à la soutenance.
+    </p>
+    <div class="container">
+      <mat-card style="background-color: #77A6F7">
+        <mat-card-title>Inscription</mat-card-title>
+        <mat-card-content>
+          <mat-accordion>
+            L’accès au cycle doctoral  est ouvert aux titulaires d’un Master/Master spécialisé ou d’un diplôme reconnu équivalent qui répond aux critères d’admission prévus dans le descriptif de demande d’accréditation des formations doctorales.
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>Documents à fournir</mat-expansion-panel-header>
+              <ul>
+                <li>Une demande manuscrite adressée à Monsieur le Directeur de l'ENSAJ;</li>
+                <li>L'original du Baccalauréat ;</li>
+                <li>L'original du diplôme de master ou du diplôme d'ingénieur ou de tout autre
+                  diplôme (Bac+5) équivalent ;</li>
+                <li>Arrêté de l'équivalence pour les diplômes étrangers ;</li>
+                <li>Les relevés de notes obtenues durant tout le cursus universitaire ;</li>
+                <li>Une copie certifiée conforme à l'original de la Carte d'Identité Nationale;</li>
+                <li>Deux photos d'identité récentes;</li>
+                <li>Une attestation de travail pour les fonctionnaires et les salariés/ou une
+                  attestation de non emploi pour les non fonctionnaires et les non-salariés;</li>
+                <li> <a download href="../../../content/charte.pdf">Charte de thèse </a>signée par le doctorant et son encadrant ;</li>
+                <li><a download href="../../../content/FicheInscription.pdf">La fiche d'inscription </a>et <a download href="../../../content/FicheDescriptive.pdf">la fiche descriptive</a> du projet de thèse dûment
+                  rempli et signé par le doctorant et son encadrant ;</li>
+                <li>Reçu d'inscription sur la Plateforme de Gestion des Doctorants.</li>
+              </ul>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </mat-card-content>
+      </mat-card>
+      <mat-card style="background-color: #D3E3FC">
+        <mat-card-title>Réinscription</mat-card-title>
+        <mat-card-content>
+          <mat-accordion>
+            Les réinscriptions au cycle doctoral se feront en ligne du 15 novembre au 04 décembre 2022.
+            Il est demandé aussi aux doctorants de déposer leur dossier en version papier au bureau du Cedoc
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>Documents à fournir</mat-expansion-panel-header>
+              <ul>
+                <li><a download href="../../../content/Formulaire.docx">Formulaire de réinscription</a>;</li>
+                <li>Demande adressé au directeur de laboratoire.</li>
+              </ul>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </mat-card-content>
+      </mat-card> <mat-card style="background-color: #FFCCBC">
+      <mat-card-title>Soutenance</mat-card-title>
+      <mat-card-content>
+        <mat-accordion>
+          Deux mois avant la date prévue de la soutenance, le candidat adressera sa demande au Directeur du CEDoc accompagnée des documents nécessaires.
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>Documents à fournir</mat-expansion-panel-header>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </mat-card-content>
+    </mat-card>
+    </div>
+  </div>
+</div>

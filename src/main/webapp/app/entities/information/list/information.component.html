@@ -1,0 +1,481 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+<div class="container" id="pdfTable" #pdfTable>
+  <form method="post">
+    <div  *ngIf="doctorant">
+    <div class="row">
+      <div class="col-md-4" style="padding-left: 50px">
+        <div class="profile-img">
+          <img *ngIf="doctorant.user!.imageUrl" [src]="decode(doctorant.user!.imageUrl)">
+          <div class="file btn btn-lg btn-primary">
+            Change Photo
+            <input type="file" name="file"/>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="profile-head">
+          <h1>
+            {{doctorant.user!.firstName}} {{doctorant.user!.lastName}}          </h1>
+          <h5>
+            {{doctorant.cursus!.nom}}
+          </h5>
+          <h6>Email : {{doctorant.user!.email}}</h6>
+          <h6>CNE : {{doctorant.cne}}</h6>
+          <h6>CIN : {{doctorant.cin}}</h6>
+          <h6 *ngIf="doctorant.anneeInscription">Année d'inscription : {{doctorant.anneeInscription}}</h6>
+          <h6>Sujet : {{sujetEncadrent.sujet}}</h6>
+
+          <div *jhiHasAnyAuthority="['ROLE_ADMIN','ROLE_RESPONSABLE']">
+            <button
+              class="btn btn-danger btn-sm"
+              (click)="setActive(doctorant, 1)"
+              *ngIf="doctorant.etatDossier==0 || doctorant.etatDossier==null"
+            >
+              Non Approuvé
+            </button>
+            <button
+              class="btn btn-success btn-sm"
+              (click)="setActive(doctorant, 0)"
+              *ngIf="doctorant.etatDossier==1"
+            >
+              Approuvé
+            </button>
+          </div>
+          <hr>
+          <div class="row mb-3"  >
+            <div style="place-content: flex-start; ">
+              <button class="btn btn-primary btn-sm" (click)="openPDF()">Imprimer le profil</button>
+              <input type="checkbox" (change)="toggleEditable({event : $event})">
+              <label class="form-label" >Avec les notes</label>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="profile-head">
+          <br>
+          <p *ngIf="doctorant.etatDossier==0" style="color: #ff0000">Etat de dossier : En cours de traitement ....</p>
+          <p *ngIf="doctorant.etatDossier==3" style="color: #ff0000">Etat de dossier : ce dossier est retire</p>
+          <p *ngIf="doctorant.etatDossier==1" style="color: green">Etat de dossier : Acceptée </p>
+          <br>
+          <h6>Date de naissance : {{doctorant.dateNaissance?.format('YYYY-MM-DD')}}</h6>
+          <h6>Lieu de naissance : {{doctorant.lieuNaissance}}</h6>
+          <h6>Téléphone : {{doctorant.numeroTelephone}}</h6>
+          <h6>Sexe : {{doctorant.genre}}</h6>
+          <h6>Encadrant :{{sujetEncadrent.nom}} {{sujetEncadrent.prenom}}</h6>
+          <h6 *ngIf="bourse.id">Bourse : <span  style="color: green" >{{bourse?.type}}</span></h6>
+          <h6 *ngIf="bourse.id===0">Bourse : <span  style="color: #ff3939" >Non Bourisier</span></h6>
+
+        </div>
+      </div>
+    </div>
+    </div>
+    <div class="row" *ngIf="publications && publications.length > 0" >
+      <h1>&nbsp;</h1>
+      <div class="row" style="padding-left: 100px;">
+        <div class="headerWrap">
+          <div class="header"><h4>Formations</h4></div>
+        </div>
+      </div>
+
+      <div class="row" style="padding-left: 100px;">
+        <div class="card h-100">
+
+          <div class="card-body"  >
+            <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">assignment</i> <a (click)="toggleShow()" type="checkbox" >Bac</a></h6>
+
+            <div *ngIf="isShown">
+              <div class="row" >
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Serie</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  {{bac.serieBac}}
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Type</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  {{bac.typeBac}}
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Date d'obtention</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  {{bac.anneeObtention}}
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Ville d'obtention</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  {{bac.villeObtention}}
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Mention</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  {{bac.mention}}
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Note</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  {{bac.noteBac}}
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Scanne</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  <div class="col-md-6" *ngIf="bac.scanneBac">
+                    <img [src]="decode(bac.scanneBac)" width="50%" (click)=openFile(bac.scanneBac,bac.scanneBacContentType)>
+                  </div>
+                </div>
+              </div>
+              <hr>
+            </div>
+          </div>
+        </div>
+        <br>
+      </div>
+      <br>
+      <div class="row" *ngFor="let fd of formationDoctorant" style="padding-left: 100px;">
+        <div class="card h-100" >
+          <div class="card-body">
+            <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">assignment</i><a (click)="toggleShow2(fd.formation?.nom)" type="checkbox" >{{fd.formation?.nom}}</a></h6>
+            <div  *ngIf="map.get(fd.formation?.nom)">
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Specialite</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  {{fd.specialite}}
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Type</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  {{fd.type}}
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Date Obtention
+                  </h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  {{fd.dateObtention}}
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Mention</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  {{fd.mention}}
+                </div>
+              </div>
+              <hr>
+              <div class="row" *ngIf="fd.note1">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Année 1</h6>
+                </div>
+                <div class="col-sm-9 text-secondary" >
+                  {{fd.note1}}
+                  &ensp;&ensp;&ensp;<a style="text-decoration:underline; color: #00c6ff" class="pull-start" *ngIf="fd.scanneNote1" (click)="openFile(fd.scanneNote1, fd.scanneNote1ContentType)">Ouvrir relevé de notes 1</a>
+                </div>
+              </div>
+              <div class="row" *ngIf="fd.note2">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Année 2</h6>
+                </div>
+                <div class="col-sm-9 text-secondary" >
+                  {{fd.note2}}
+                  &ensp;&ensp;&ensp;<a style="text-decoration:underline; color: #00c6ff"
+                                       class="pull-start" *ngIf="fd.scanneNote2" (click)="openFile(fd.scanneNote2, fd.scanneNote2ContentType)">Ouvrir relevé de notes 2</a>
+
+                </div>
+              </div>
+              <div class="row" *ngIf="fd.note3">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Année 3</h6>
+                </div>
+                <div class="col-sm-9 text-secondary" >
+                  {{fd.note3}}
+                  &ensp;&ensp;&ensp;<a style="text-decoration:underline; color: #00c6ff" class="pull-start" *ngIf="fd.scanneNote3" (click)="openFile(fd.scanneNote3, fd.scanneNote3ContentType)">Ouvrir relevé de notes 3</a>
+
+                </div>
+              </div><div class="row" *ngIf="fd.note4">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Année 4</h6>
+              </div>
+              <div class="col-sm-9 text-secondary" >
+                {{fd.note4}}
+                &ensp;&ensp;&ensp;<a style="text-decoration:underline; color: #00c6ff" class="pull-start" *ngIf="fd.scanneNote4" (click)="openFile(fd.scanneNote4, fd.scanneNote4ContentType)">Ouvrir relevé de notes 4</a>
+
+              </div>
+            </div><div class="row" *ngIf="fd.note5">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Année 5</h6>
+              </div>
+              <div class="col-sm-9 text-secondary" >
+                {{fd.note5}}
+                &ensp;&ensp;&ensp;<a style="text-decoration:underline; color: #00c6ff" class="pull-start" *ngIf="fd.scanneNote5" (click)="openFile(fd.scanneNote5, fd.scanneNote5ContentType)">Ouvrir relevé de notes 5</a>
+
+              </div>
+            </div>
+
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Diplome
+                  </h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  <div class="col-md-6" *ngIf="fd.scanneDiplome">
+                    <img [src]="decode(fd.scanneDiplome)" width="50%" (click)=openFile(fd.scanneDiplome,fd.scanneDiplomeContentType)>
+                  </div>
+                </div>
+                <hr>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h1>&nbsp;</h1>
+      <div class="row" style="padding-left: 100px;">
+        <div class="headerWrap">
+          <div class="header"><h4>Publications</h4></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6" >
+          <div *ngFor="let type of types">
+            <div style="padding-left: 100px; color:#00a9ec;"><h6>Publication de type {{type}}</h6></div>
+
+            <div  *ngFor="let publication of publications" style="padding-left: 100px;">
+              <div *ngIf="type===publication.type">
+                <div class="card h-100">
+                  <div class="card-body" >
+                    <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">assignment</i> <a (click)="toggleShow2(publication.titre)" type="checkbox" >Publication: {{publication.titre}}</a></h6>
+                    <div *ngIf="map.get(publication.titre)" >
+                      <div class="row" >
+                        <div class="col-sm-3">
+                          <h6 class="mb-0">Titre</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                          {{publication.titre}}
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <h6 class="mb-0">Type</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                          {{publication.type}}
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <h6 class="mb-0">Date</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                          {{publication.date}}
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <h6 class="mb-0">description</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                          {{publication.description}}
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <h6 class="mb-0">Co-auteur</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary" *ngFor="let chercheur of publication.chercheurs">
+                          {{chercheur.login}}
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row" *ngFor="let chercheur of publication.chercheurExternes">
+                        <div class="col-sm-3">
+                          <h6 class="mb-0">chercheur Externe</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary" >
+                          {{chercheur.nom}}
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <h6 class="mb-0">Article</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                          <div class="col-md-6" *ngIf="publication.article">
+                            <img [src]="decode(publication.article)" width="50%" (click)=openFile(publication.article,publication.articleContentType)>
+                          </div>
+                        </div>
+                      </div>
+                      <hr>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div>
+
+            <canvas baseChart
+                    [datasets]="lineChartData"
+                    [labels]="lineChartLabels"
+                    [options]="lineChartOptions"
+                    [colors]="lineChartColors"
+                    [legend]="lineChartLegend"
+                    [chartType]="lineChartType"
+                    [plugins]="lineChartPlugins">
+            </canvas>
+            <canvas baseChart
+                    [data]="pieChartData"
+                    [labels]="pieChartLabels"
+                    [chartType]="pieChartType"
+                    [options]="pieChartOptions"
+                    [plugins]="pieChartPlugins"
+                    [legend]="pieChartLegend"
+                    [colors]="pieChartColors"
+            >
+            </canvas>
+
+            <canvas baseChart
+                    [datasets]="lineChartData2"
+                    [labels]="lineChartLabels2"
+                    [options]="lineChartOptions2"
+                    [colors]="lineChartColors2"
+                    [legend]="lineChartLegend2"
+                    [chartType]="lineChartType2"
+                    [plugins]="lineChartPlugins2">
+            </canvas>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div   *ngIf="formationsuivie && formationsuivie.length > 0" >
+      <div class="row" style="padding-left: 100px;">
+        <div class="headerWrap">
+          <div class="header"><h4>Formations doctorales ({{duree}} Heures)</h4></div>
+        </div>
+      </div>
+      <div class="row" *ngFor="let fd of formationsuivie" style="padding-left: 100px;">
+        <div class="card h-100" >
+          <div class="card-body">
+            <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">assignment</i><a (click)="toggleShow2(fd.formationDoctoranle?.thematique)" type="checkbox" >{{fd.formationDoctoranle?.thematique}}<span *ngIf="fd.formationDoctoranle?.thematique==='Autre'">"{{fd?.titre}}"</span><div style="text-align: left;">({{fd.duree}} Heures)</div></a></h6>
+            <div  *ngIf="map.get(fd.formationDoctoranle?.thematique)">
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Date Obtention
+                  </h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  {{fd.date}}
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Diplome
+                  </h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  <div class="col-md-6" *ngIf="fd.attestation">
+                    <img [src]="decode(fd.attestation)" width="50%" (click)=openFile(fd.attestation,fd.attestationContentType)>
+                  </div>
+                </div>
+                <hr>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="chart-wrapper" style="padding-left: 100px;">
+        <canvas baseChart
+                [datasets]="barChartData"
+                [labels]="barChartLabels"
+                [options]="barChartOptions"
+                [plugins]="barChartPlugins"
+                [legend]="barChartLegend"
+                [chartType]="barChartType">
+        </canvas>
+      </div>
+    </div>
+
+
+
+    <div [style.display]="'none'">
+      <table id="pdf" class="table table-bordered" aria-describedby="page-heading">
+        <thead>
+        <tr>
+          <th rowspan="2">Bac</th>
+          <th [attr.colspan]="fd.formation?.nbAnnee" *ngFor="let fd of formationDoctorant">{{fd.formation?.nom}}</th>
+        </tr>
+        <tr>
+          <ng-container *ngFor="let fd of formationDoctorant">
+            <th *ngFor="let n of [].constructor(fd.formation?.nbAnnee); let r = index;" >Année {{r+1}}</th>
+          </ng-container>
+        </tr>
+
+        </thead>
+        <tbody>
+        <tr>
+          <th>{{bac.noteBac}}</th>
+          <ng-container *ngFor="let fd of formationDoctorant">
+            <th *ngIf="fd.note1">{{fd.note1}}</th>
+            <th *ngIf="fd.note2">{{fd.note2}}</th>
+            <th *ngIf="fd.note3">{{fd.note3}}</th>
+            <th *ngIf="fd.note4">{{fd.note4}}</th>
+            <th *ngIf="fd.note5">{{fd.note5}}</th>
+
+          </ng-container>
+        </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </form>
+</div>

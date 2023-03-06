@@ -1,0 +1,27 @@
+{
+  "doctorantApp": {
+    "cursus": {
+      "home": {
+        "title": "Cursuses",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Cursus",
+        "createOrEditLabel": "Créer ou éditer un Cursus",
+        "notFound": "Aucun Cursus trouvé"
+      },
+      "created": "Un nouveau Cursus a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Cursus avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Cursus avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Cursus {{ id }} ?"
+      },
+      "detail": {
+        "title": "Cursus"
+      },
+      "id": "ID",
+      "nom": "Nom",
+      "nbFormation": "Nb Formation",
+      "doctorant": "Doctorant",
+      "formation": "Formation"
+    }
+  }
+}

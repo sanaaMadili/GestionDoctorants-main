@@ -1,0 +1,42 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="laboratoire">
+      <h2 data-cy="laboratoireDetailsHeading"><span jhiTranslate="doctorantApp.laboratoire.detail.title">Laboratoire</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ laboratoire.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.laboratoire.nom">Nom</span></dt>
+        <dd>
+          <span>{{ laboratoire.nom }}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.laboratoire.abreviation">Abreviation</span></dt>
+        <dd>
+          <span>{{ laboratoire.abreviation }}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.laboratoire.extrauser">chef de labo</span></dt>
+        <dd>
+          <div *ngIf="laboratoire.extrauser">
+            <a [routerLink]="['/extra-user', laboratoire.extrauser?.id, 'view']">{{ laboratoire.extrauser?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/laboratoire', laboratoire.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

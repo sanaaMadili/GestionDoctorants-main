@@ -1,0 +1,101 @@
+{
+  "applications": "*",
+  "changelogDate": "20220316122715",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "formation_doctorant",
+  "fields": [
+    {
+      "fieldName": "specialite",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dateObtention",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "note1",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "scanneNote1",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    },
+    {
+      "fieldName": "note2",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "scanneNote2",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    },
+    {
+      "fieldName": "note3",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "scanneNote3",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    },
+    {
+      "fieldName": "note4",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "scanneNote4",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    },
+    {
+      "fieldName": "note5",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "scanneNote5",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    },
+    {
+      "fieldName": "scanneDiplome",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    },
+    {
+      "fieldName": "mention",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "FormationDoctorant",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "formation",
+      "otherEntityRelationshipName": "formationDoctorant",
+      "relationshipName": "formation",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "doctorant",
+      "otherEntityRelationshipName": "formationDoctorant",
+      "relationshipName": "doctorant",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "etablissement",
+      "otherEntityRelationshipName": "formationDoctorant",
+      "relationshipName": "etablissement",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "no"
+}

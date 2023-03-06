@@ -1,0 +1,137 @@
+{
+  "applications": "*",
+  "changelogDate": "20220316122713",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "doctorant",
+  "fields": [
+    {
+      "fieldName": "cne",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "etatProfessionnel",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required", "min", "max"],
+      "fieldValidateRulesMax": "3",
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "photoCNEPile",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    },
+    {
+      "fieldName": "photoCNEFace",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    },
+    {
+      "fieldName": "photoCv",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    },
+    {
+      "fieldName": "anneeInscription",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "etatDossier",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "cin",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dateNaissance",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "lieuNaissance",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "nationalite",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "adresse",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "numeroTelephone",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "genre",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "nomArabe",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "prnomArabe",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Doctorant",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "titre",
+      "otherEntityName": "sujet",
+      "otherEntityRelationshipName": "doctorant",
+      "ownerSide": true,
+      "relationshipName": "sujet",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "doctorant",
+      "ownerSide": true,
+      "relationshipName": "user",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityField": "annee",
+      "otherEntityName": "promotion",
+      "otherEntityRelationshipName": "doctorant",
+      "relationshipName": "promotion",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "cursus",
+      "otherEntityRelationshipName": "doctorant",
+      "relationshipName": "cursus",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "formationDoctorant",
+      "otherEntityRelationshipName": "doctorant",
+      "relationshipName": "formationDoctorant",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "formationSuivie",
+      "otherEntityRelationshipName": "doctorant",
+      "relationshipName": "formationSuivie",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "no"
+}

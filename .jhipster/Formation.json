@@ -1,0 +1,45 @@
+{
+  "applications": "*",
+  "changelogDate": "20220316122714",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "formation",
+  "fields": [
+    {
+      "fieldName": "nom",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "niveau",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "nbAnnee",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "rang",
+      "fieldType": "Integer"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Formation",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "cursus",
+      "otherEntityRelationshipName": "formation",
+      "relationshipName": "cursus",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "formationDoctorant",
+      "otherEntityRelationshipName": "formation",
+      "relationshipName": "formationDoctorant",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "no"
+}

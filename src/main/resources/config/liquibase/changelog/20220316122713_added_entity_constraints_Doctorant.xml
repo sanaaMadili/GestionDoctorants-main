@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+    <!--
+        Added the constraints for entity Doctorant.
+    -->
+    <changeSet id="20220316122713-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="sujet_id"
+                                 baseTableName="doctorant"
+                                 constraintName="fk_doctorant__sujet_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="sujet"/>
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="doctorant"
+                                 constraintName="fk_doctorant__user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="promotion_id"
+                                 baseTableName="doctorant"
+                                 constraintName="fk_doctorant__promotion_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="promotion"/>
+
+        <addForeignKeyConstraint baseColumnNames="cursus_id"
+                                 baseTableName="doctorant"
+                                 constraintName="fk_doctorant__cursus_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="cursus"/>
+    </changeSet>
+</databaseChangeLog>

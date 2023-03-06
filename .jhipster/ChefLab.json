@@ -1,0 +1,43 @@
+{
+  "applications": "*",
+  "changelogDate": "20220316122727",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "chef_lab",
+  "fields": [
+    {
+      "fieldName": "dateDebut",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dateFin",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "ChefLab",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "cin",
+      "otherEntityName": "extraUser",
+      "otherEntityRelationshipName": "chefLab",
+      "ownerSide": true,
+      "relationshipName": "extraUser",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityField": "nom",
+      "otherEntityName": "laboratoire",
+      "otherEntityRelationshipName": "chefLab",
+      "ownerSide": true,
+      "relationshipName": "laboratoire",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "service": "no"
+}

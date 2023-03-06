@@ -1,0 +1,89 @@
+<div>
+  <h2 id="page-heading" data-cy="BacHeading">
+    <span jhiTranslate="doctorantApp.bac.home.title">Bacs</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="doctorantApp.bac.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-bac"
+        [routerLink]="['/bac/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="doctorantApp.bac.home.createLabel"> Create a new Bac </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="bacs?.length === 0">
+    <span jhiTranslate="doctorantApp.bac.home.notFound">No bacs found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="bacs && bacs.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span jhiTranslate="doctorantApp.bac.serieBac">Serie Bac</span></th>
+          <th scope="col"><span jhiTranslate="doctorantApp.bac.typeBac">Type Bac</span></th>
+          <th scope="col"><span jhiTranslate="doctorantApp.bac.anneeObtention">Annee Obtention</span></th>
+          <th scope="col"><span jhiTranslate="doctorantApp.bac.noteBac">Note Bac</span></th>
+          <th scope="col"><span jhiTranslate="doctorantApp.bac.scanneBac">Scanne Bac</span></th>
+          <th scope="col"><span jhiTranslate="doctorantApp.bac.mention">Mention</span></th>
+          <th scope="col"><span jhiTranslate="doctorantApp.bac.villeObtention">Ville Obtention</span></th>
+          <th scope="col"><span jhiTranslate="doctorantApp.bac.doctorant">Doctorant</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let bac of bacs; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/bac', bac.id, 'view']">{{ bac.id }}</a>
+          </td>
+          <td>{{ bac.serieBac }}</td>
+          <td>{{ bac.typeBac }}</td>
+          <td>{{ bac.anneeObtention }}</td>
+          <td>{{ bac.noteBac }}</td>
+          <td>
+            <a *ngIf="bac.scanneBac" (click)="openFile(bac.scanneBac, bac.scanneBacContentType)" jhiTranslate="entity.action.open">open</a>
+            <span *ngIf="bac.scanneBac">{{ bac.scanneBacContentType }}, {{ byteSize(bac.scanneBac) }}</span>
+          </td>
+          <td>{{ bac.mention }}</td>
+          <td>{{ bac.villeObtention }}</td>
+          <td>
+            <div *ngIf="bac.doctorant">
+              <a [routerLink]="['/doctorant', bac.doctorant?.id, 'view']">{{ bac.doctorant?.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/bac', bac.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/bac', bac.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(bac)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

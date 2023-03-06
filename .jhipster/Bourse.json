@@ -1,0 +1,29 @@
+{
+  "applications": "*",
+  "changelogDate": "20220316122728",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "bourse",
+  "fields": [
+    {
+      "fieldName": "type",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Bourse",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "cne",
+      "otherEntityName": "doctorant",
+      "otherEntityRelationshipName": "bourse",
+      "ownerSide": true,
+      "relationshipName": "doctorant",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "service": "no"
+}

@@ -1,0 +1,68 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="extraUser">
+      <h2 data-cy="extraUserDetailsHeading"><span jhiTranslate="doctorantApp.extraUser.detail.title">Extra User</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ extraUser.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.extraUser.cin">Cin</span></dt>
+        <dd>
+          <span>{{ extraUser.cin }}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.extraUser.dateNaissance">Date Naissance</span></dt>
+        <dd>
+          <span>{{ extraUser.dateNaissance | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.extraUser.lieuNaissance">Lieu Naissance</span></dt>
+        <dd>
+          <span>{{ extraUser.lieuNaissance }}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.extraUser.nationalite">Nationalite</span></dt>
+        <dd>
+          <span>{{ extraUser.nationalite }}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.extraUser.adresse">Adresse</span></dt>
+        <dd>
+          <span>{{ extraUser.adresse }}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.extraUser.numeroTelephone">Numero Telephone</span></dt>
+        <dd>
+          <span>{{ extraUser.numeroTelephone }}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.extraUser.genre">Genre</span></dt>
+        <dd>
+          <span>{{ extraUser.genre }}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.extraUser.nomArabe">Nom Arabe</span></dt>
+        <dd>
+          <span>{{ extraUser.nomArabe }}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.extraUser.prnomArabe">Prnom Arabe</span></dt>
+        <dd>
+          <span>{{ extraUser.prnomArabe }}</span>
+        </dd>
+        <dt><span jhiTranslate="doctorantApp.extraUser.internalUser">Internal User</span></dt>
+        <dd>
+          <span>{{ extraUser.internalUser?.id }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/extra-user', extraUser.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

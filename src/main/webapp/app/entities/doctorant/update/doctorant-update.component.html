@@ -1,0 +1,523 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-doctorant-heading" data-cy="DoctorantCreateUpdateHeading">
+        Données personnelles
+      </h2>
+      <br>
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="false" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div style="display: flex; justify-content: space-evenly;">
+          <div>
+            <label class="form-label"  for="field_user">Nom</label>
+            <input
+              readonly
+              type="text"
+              class="form-control"
+              value ="{{ account.lastName }}"
+            />
+          </div>
+          <div>
+            <label class="form-label"  for="field_user">Prenom</label>
+            <input
+              readonly
+              type="text"
+              class="form-control"
+              value ="{{ account.firstName }}"
+            />
+          </div>
+
+        </div>
+
+
+        <div style="display: flex; justify-content: space-evenly;">
+          <div>
+            <label class="form-label" for="field_nomArabe">الاسم العائلي</label>
+            <input  [readonly]="editForm.get('etatDossier')!.value===1" type="text" class="form-control" id="field_nomArabe" data-cy="nomArabe" formControlName="nomArabe" />
+            <div *ngIf="editForm.get('nomArabe')!.invalid && (editForm.get('nomArabe')!.dirty || editForm.get('nomArabe')!.touched)">
+              <small
+                class="form-text text-danger"
+                *ngIf="editForm.get('nomArabe')?.errors?.required"
+                jhiTranslate="entity.validation.required"
+              >
+                This field is required.
+              </small>
+            </div>
+          </div>
+
+          <div>
+            <label class="form-label" for="field_prnomArabe">الاسم الشخصي</label>
+            <input
+              [readonly]="editForm.get('etatDossier')!.value===1"
+              type="text"
+              class="form-control"
+              name="prnomArabe"
+              id="field_prnomArabe"
+              data-cy="prnomArabe"
+              formControlName="prnomArabe"
+            />
+            <div *ngIf="editForm.get('prnomArabe')!.invalid && (editForm.get('prnomArabe')!.dirty || editForm.get('prnomArabe')!.touched)">
+              <small
+                class="form-text text-danger"
+                *ngIf="editForm.get('prnomArabe')?.errors?.required"
+                jhiTranslate="entity.validation.required"
+              >
+                This field is required.
+              </small>
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-evenly;">
+          <div >
+            <label class="form-label" jhiTranslate="doctorantApp.doctorant.dateNaissance" for="field_dateNaissance">Date Naissance</label>
+            <div class="d-flex">
+              <input
+                [readonly]="editForm.get('etatDossier')!.value===1"
+                id="field_dateNaissance"
+                data-cy="dateNaissance"
+                type="datetime-local"
+                class="form-control"
+                name="dateNaissance"
+                formControlName="dateNaissance"
+                placeholder="YYYY-MM-DD HH:mm"
+              />
+            </div>
+            <div
+              *ngIf="
+              editForm.get('dateNaissance')!.invalid && (editForm.get('dateNaissance')!.dirty || editForm.get('dateNaissance')!.touched)
+            "
+            >
+              <small
+                class="form-text text-danger"
+                *ngIf="editForm.get('dateNaissance')?.errors?.required"
+                jhiTranslate="entity.validation.required"
+              >
+                This field is required.
+              </small>
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('dateNaissance')?.errors?.ZonedDateTimelocal"
+                jhiTranslate="entity.validation.ZonedDateTimelocal"
+              >
+                This field should be a date and time.
+              </small>
+            </div>
+          </div>
+
+          <div>
+            <label class="form-label" jhiTranslate="doctorantApp.doctorant.lieuNaissance" for="field_lieuNaissance">Lieu Naissance</label>
+            <input
+              [readonly]="editForm.get('etatDossier')!.value===1"
+              type="text"
+              class="form-control"
+              name="lieuNaissance"
+              id="field_lieuNaissance"
+              data-cy="lieuNaissance"
+              formControlName="lieuNaissance"
+            />
+            <div
+              *ngIf="
+              editForm.get('lieuNaissance')!.invalid && (editForm.get('lieuNaissance')!.dirty || editForm.get('lieuNaissance')!.touched)
+            "
+            >
+              <small
+                class="form-text text-danger"
+                *ngIf="editForm.get('lieuNaissance')?.errors?.required"
+                jhiTranslate="entity.validation.required"
+              >
+                This field is required.
+              </small>
+            </div>
+          </div>
+        </div>
+        <div style="display: flex; justify-content: space-evenly;">
+          <div>
+            <label class="form-label" for="field_genre">Sexe</label>
+            <select  type="text" class="form-control" name="genre" id="field_genre" data-cy="genre" formControlName="genre" >
+              <option></option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+            <div *ngIf="editForm.get('genre')!.invalid && (editForm.get('genre')!.dirty || editForm.get('genre')!.touched)">
+              <small size="30" class="form-text text-danger" *ngIf="editForm.get('genre')?.errors?.required" jhiTranslate="entity.validation.required">
+                This field is required.
+              </small>
+            </div>
+          </div>
+          <div>
+            <label class="form-label" for="field_nationalite">Nationalité</label>
+            <input
+              [readonly]="editForm.get('etatDossier')!.value===1"
+              size="30"
+              type="text"
+              class="form-control"
+              name="nationalite"
+              id="field_nationalite"
+              data-cy="nationalite"
+              formControlName="nationalite"
+            />
+            <div *ngIf="editForm.get('nationalite')!.invalid && (editForm.get('nationalite')!.dirty || editForm.get('nationalite')!.touched)">
+              <small
+                class="form-text text-danger"
+                *ngIf="editForm.get('nationalite')?.errors?.required"
+                jhiTranslate="entity.validation.required"
+              >
+                This field is required.
+              </small>
+            </div>
+          </div>
+
+        </div>
+        <div style="display: flex; justify-content: space-evenly;">
+          <div>
+            <label class="form-label" jhiTranslate="doctorantApp.doctorant.adresse" for="field_adresse">Adresse</label>
+            <input [readonly]="editForm.get('etatDossier')!.value===1" type="text" class="form-control" name="adresse" id="field_adresse" data-cy="adresse" formControlName="adresse" />
+            <div *ngIf="editForm.get('adresse')!.invalid && (editForm.get('adresse')!.dirty || editForm.get('adresse')!.touched)">
+              <small
+                class="form-text text-danger"
+                *ngIf="editForm.get('adresse')?.errors?.required"
+                jhiTranslate="entity.validation.required"
+              >
+                This field is required.
+              </small>
+            </div>
+          </div>
+          <div>
+            <label class="form-label" jhiTranslate="doctorantApp.doctorant.numeroTelephone" for="field_numeroTelephone"
+            >Numero Telephone</label
+            >
+            <input
+              [readonly]="editForm.get('etatDossier')!.value===1"
+              type="number"
+              class="form-control"
+              name="numeroTelephone"
+              id="field_numeroTelephone"
+              data-cy="numeroTelephone"
+              formControlName="numeroTelephone"
+            />
+            <div
+              *ngIf="
+              editForm.get('numeroTelephone')!.invalid &&
+              (editForm.get('numeroTelephone')!.dirty || editForm.get('numeroTelephone')!.touched)
+            "
+            >
+              <small
+                class="form-text text-danger"
+                *ngIf="editForm.get('numeroTelephone')?.errors?.required"
+                jhiTranslate="entity.validation.required"
+              >
+                This field is required.
+              </small>
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('numeroTelephone')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+              >
+                This field should be a number.
+              </small>
+            </div>
+          </div>
+        </div>
+        <br>
+        <hr><br>
+        <div style="display: flex; justify-content: space-evenly;">
+          <div>
+            <label class="form-label" for="field_cne">N° Cne</label>
+            <input [readonly]="editForm.get('etatDossier')!.value===1" type="text" class="form-control" name="cne" id="field_cne" data-cy="cne" formControlName="cne" />
+            <div *ngIf="editForm.get('cne')!.invalid && (editForm.get('cne')!.dirty || editForm.get('cne')!.touched)">
+              <small class="form-text text-danger" *ngIf="editForm.get('cne')?.errors?.required" jhiTranslate="entity.validation.required">
+                This field is required.
+              </small>
+            </div>
+          </div>
+          <div>
+            <label class="form-label" for="field_cin">N° Cin</label>
+            <input [readonly]="editForm.get('etatDossier')!.value===1" type="text" class="form-control" name="cin" id="field_cin" data-cy="cin" formControlName="cin" />
+            <div *ngIf="editForm.get('cin')!.invalid && (editForm.get('cin')!.dirty || editForm.get('cin')!.touched)">
+              <small class="form-text text-danger" *ngIf="editForm.get('cin')?.errors?.required" jhiTranslate="entity.validation.required">
+                This field is required.
+              </small>
+            </div>
+          </div>
+
+        </div>
+        <br>
+        <div style="display: flex; ">
+
+          <div style="padding-left:100px">
+            <label class="form-label" for="field_photoCNEPile">CIN Face 1</label>
+            <div>
+              <div *ngIf="editForm.get('photoCNEPile')!.value" class="form-text text-danger clearfix">
+                <a
+                  class="pull-start"
+                  (click)="openFile(editForm.get('photoCNEPile')!.value, editForm.get('photoCNEPileContentType')!.value)"
+                  jhiTranslate="entity.action.open"
+                >open</a
+                ><br />
+                <span class="pull-start"
+                >{{ editForm.get('photoCNEPileContentType')!.value }}, {{ byteSize(editForm.get('photoCNEPile')!.value) }}</span
+                >
+                <button
+                  type="button"
+                  (click)="editForm.patchValue({ photoCNEPile: null }); editForm.patchValue({ photoCNEPileContentType: null })"
+                  class="btn btn-secondary btn-xs pull-end"
+                >
+                  <fa-icon icon="times"></fa-icon>
+                </button>
+              </div>
+              <input
+                [readonly]="editForm.get('etatDossier')!.value===1"
+                type="file"
+                id="file_photoCNEPile"
+                data-cy="photoCNEPile"
+                (change)="setFileData($event, 'photoCNEPile', false)"
+                jhiTranslate="entity.action.addblob"
+              />
+            </div>
+            <input
+              [readonly]="editForm.get('etatDossier')!.value===1"
+              type="hidden"
+              class="form-control"
+              name="photoCNEPile"
+              id="field_photoCNEPile"
+              data-cy="photoCNEPile"
+              formControlName="photoCNEPile"
+            />
+            <input
+              [readonly]="editForm.get('etatDossier')!.value===1"
+              type="hidden"
+              class="form-control"
+              name="photoCNEPileContentType"
+              id="field_photoCNEPileContentType"
+              formControlName="photoCNEPileContentType"
+            />
+          </div>
+
+          <div  style="padding-left:200px">
+            <label class="form-label" for="field_photoCNEFace">CIN Face 2</label>
+            <div>
+              <div *ngIf="editForm.get('photoCNEFace')!.value" class="form-text text-danger clearfix">
+                <a
+                  class="pull-start"
+                  (click)="openFile(editForm.get('photoCNEFace')!.value, editForm.get('photoCNEFaceContentType')!.value)"
+                  jhiTranslate="entity.action.open"
+                >open</a
+                ><br />
+                <span class="pull-start"
+                >{{ editForm.get('photoCNEFaceContentType')!.value }}, {{ byteSize(editForm.get('photoCNEFace')!.value) }}</span
+                >
+                <button
+                  type="button"
+                  (click)="editForm.patchValue({ photoCNEFace: null }); editForm.patchValue({ photoCNEFaceContentType: null })"
+                  class="btn btn-secondary btn-xs pull-end"
+                >
+                  <fa-icon icon="times"></fa-icon>
+                </button>
+              </div>
+              <input
+                [readonly]="editForm.get('etatDossier')!.value===1"
+                type="file"
+                id="file_photoCNEFace"
+                data-cy="photoCNEFace"
+                (change)="setFileData($event, 'photoCNEFace', false)"
+                jhiTranslate="entity.action.addblob"
+              />
+            </div>
+            <input
+              [readonly]="editForm.get('etatDossier')!.value===1"
+              type="hidden"
+              class="form-control"
+              name="photoCNEFace"
+              id="field_photoCNEFace"
+              data-cy="photoCNEFace"
+              formControlName="photoCNEFace"
+            />
+            <input
+              [readonly]="editForm.get('etatDossier')!.value===1"
+              type="hidden"
+              class="form-control"
+              name="photoCNEFaceContentType"
+              id="field_photoCNEFaceContentType"
+              formControlName="photoCNEFaceContentType"
+            />
+          </div>
+        </div>
+        <br>
+        <div style="display: flex; ">
+          <div style="padding-left:100px">
+            <label class="form-label" jhiTranslate="doctorantApp.doctorant.etatProfessionnel" for="field_etatProfessionnel"
+            >Etat Professionnel</label
+            >
+            <select class="form-control"
+                    name="etatProfessionnel"
+                    id="field_etatProfessionnel"
+                    data-cy="etatProfessionnel"
+                    formControlName="etatProfessionnel">
+              <option [ngValue]="1">Sans emploi</option>
+              <option [ngValue]="2">Salarié</option>
+              <option [ngValue]="3">Fonctionnaire</option>
+            </select>
+
+          </div>
+          <div style="padding-left:100px">
+            <label class="form-label" for="field_photoCv">Curriculum Vitae (CV)</label>
+            <div>
+              <div *ngIf="editForm.get('photoCv')!.value" class="form-text text-danger clearfix">
+                <a
+                  class="pull-start"
+                  (click)="openFile(editForm.get('photoCv')!.value, editForm.get('photoCvContentType')!.value)"
+                  jhiTranslate="entity.action.open"
+                >open</a
+                ><br />
+                <span class="pull-start"
+                >{{ editForm.get('photoCvContentType')!.value }}, {{ byteSize(editForm.get('photoCv')!.value) }}</span
+                >
+                <button
+                  type="button"
+                  (click)="editForm.patchValue({ photoCv: null }); editForm.patchValue({ photoCvContentType: null })"
+                  class="btn btn-secondary btn-xs pull-end"
+                >
+                  <fa-icon icon="times"></fa-icon>
+                </button>
+              </div>
+              <input
+                [readonly]="editForm.get('etatDossier')!.value===1"
+                type="file"
+                id="file_photoCv"
+                data-cy="photoCv"
+                (change)="setFileData($event, 'photoCv', false)"
+                jhiTranslate="entity.action.addblob"
+              />
+            </div>
+            <input [readonly]="editForm.get('etatDossier')!.value===1" type="hidden" class="form-control" name="photoCv" id="field_photoCv" data-cy="photoCv" formControlName="photoCv" />
+            <input
+              [readonly]="editForm.get('etatDossier')!.value===1"
+              type="hidden"
+              class="form-control"
+              name="photoCvContentType"
+              id="field_photoCvContentType"
+              formControlName="photoCvContentType"
+            />
+          </div>
+        </div>
+        <br><hr><br>
+        <div style="display: flex; justify-content: space-evenly;">
+          <div >
+            <label class="form-label" jhiTranslate="doctorantApp.doctorant.sujet" for="field_sujet">Sujet</label>
+            <select class="form-control" id="field_sujet" data-cy="sujet" name="sujet" formControlName="sujet" [(ngModel)]="sujeta" >
+              <option [ngValue]="null"></option>
+              <option
+                *ngFor="let sujetOption of sujetsCollection ; trackBy: trackSujetById"
+                [ngValue]="sujetOption.id === editForm.get('sujet')!.value?.id ? editForm.get('sujet')!.value : sujetOption"
+              >
+                {{ sujetOption.titre }}
+              </option>
+            </select>
+            <div *ngIf="sujeta">
+              <label>Encadrant :</label>
+            <label *ngIf="sujeta.encadrent!=undefined"> {{ editForm.get('sujet')!.value?.encadrent.nomArabe}} </label>
+</div>
+          </div>
+
+
+          <div>
+            <label class="form-label" jhiTranslate="doctorantApp.doctorant.cursus" for="field_cursus">Cursus</label>
+            <select class="form-control" id="field_cursus" data-cy="cursus" name="cursus" formControlName="cursus">
+              <option [ngValue]="null"></option>
+              <option
+                [ngValue]="cursusOption.id === editForm.get('cursus')!.value?.id ? editForm.get('cursus')!.value : cursusOption"
+                *ngFor="let cursusOption of cursusesSharedCollection; trackBy: trackCursusById"
+              >
+                {{ cursusOption.nom }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+
+        <div class="row mb-3" *ngIf="false">
+          <label class="form-label" jhiTranslate="doctorantApp.doctorant.anneeInscription" for="field_anneeInscription"
+          >Annee Inscription</label
+          >
+          <input
+            [readonly]="editForm.get('etatDossier')!.value===1"
+            type="number"
+            class="form-control"
+            name="anneeInscription"
+            id="field_anneeInscription"
+            data-cy="anneeInscription"
+            formControlName="anneeInscription"
+          />
+        </div>
+
+        <div class="row mb-3" *ngIf="false">
+          <label class="form-label" jhiTranslate="doctorantApp.doctorant.etatDossier" for="field_etatDossier">Etat Dossier</label>
+          <input
+            [readonly]="editForm.get('etatDossier')!.value===1"
+            type="number"
+            class="form-control"
+            name="etatDossier"
+            id="field_etatDossier"
+            data-cy="etatDossier"
+            formControlName="etatDossier"
+          />
+        </div>
+
+
+
+
+        <div class="row mb-3" *ngIf="false">
+          <label class="form-label" jhiTranslate="doctorantApp.doctorant.user" for="field_user">User</label>
+          <select class="form-control" id="field_user" data-cy="user" name="user" formControlName="user">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="userOption.id === editForm.get('user')!.value?.id ? editForm.get('user')!.value : userOption"
+              *ngFor="let userOption of usersSharedCollection; trackBy: trackUserById"
+            >
+              {{ userOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3" *ngIf="false">
+          <label class="form-label" jhiTranslate="doctorantApp.doctorant.promotion" for="field_promotion">Promotion</label>
+          <select class="form-control" id="field_promotion" data-cy="promotion" name="promotion" formControlName="promotion">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="promotionOption.id === editForm.get('promotion')!.value?.id ? editForm.get('promotion')!.value : promotionOption"
+              *ngFor="let promotionOption of promotionsSharedCollection; trackBy: trackPromotionById"
+            >
+              {{ promotionOption.annee }}
+            </option>
+          </select>
+        </div>
+
+
+      </div>
+      <br><hr>
+      <div style="display: flex; justify-content: space-evenly;" *ngIf="editForm.get('etatDossier')!.value!==1">
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

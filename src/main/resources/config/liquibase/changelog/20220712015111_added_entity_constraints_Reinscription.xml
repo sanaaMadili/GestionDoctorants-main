@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+    <!--
+        Added the constraints for entity Reinscription.
+    -->
+    <changeSet id="20220712015111-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="etablissement_id"
+                                 baseTableName="reinscription"
+                                 constraintName="fk_reinscription__etablissement_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="etablissement"/>
+
+        <addForeignKeyConstraint baseColumnNames="doctorant_id"
+                                 baseTableName="reinscription"
+                                 constraintName="fk_reinscription__doctorant_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="doctorant"/>
+    </changeSet>
+</databaseChangeLog>

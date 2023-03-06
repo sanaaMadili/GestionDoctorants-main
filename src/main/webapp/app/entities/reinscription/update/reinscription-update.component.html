@@ -1,0 +1,179 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-reinscription-heading"
+        data-cy="ReinscriptionCreateUpdateHeading"
+      >
+        Veuillez fournir les documents pour la ré-inscription
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_formulaireReinscription"
+            >Formulaire de ré-inscription</label
+          >
+          <div>
+            <div *ngIf="editForm.get('formulaireReinscription')!.value" class="form-text text-danger clearfix">
+              <a
+                class="pull-start"
+                (click)="
+                  openFile(editForm.get('formulaireReinscription')!.value, editForm.get('formulaireReinscriptionContentType')!.value)
+                "
+                jhiTranslate="entity.action.open"
+                >open</a
+              ><br />
+              <span class="pull-start"
+                >{{ editForm.get('formulaireReinscriptionContentType')!.value }},
+                {{ byteSize(editForm.get('formulaireReinscription')!.value) }}</span
+              >
+              <button
+                type="button"
+                (click)="
+                  editForm.patchValue({ formulaireReinscription: null }); editForm.patchValue({ formulaireReinscriptionContentType: null })
+                "
+                class="btn btn-secondary btn-xs pull-end"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_formulaireReinscription"
+              data-cy="formulaireReinscription"
+              (change)="setFileData($event, 'formulaireReinscription', false)"
+              jhiTranslate="entity.action.addblob"
+            />
+            <p></p>
+            <a download href="../../../content/Formulaire.docx">Téléchargez le formulaire à remplir ici</a>
+          </div>
+          <input
+            type="hidden"
+            class="form-control"
+            name="formulaireReinscription"
+            id="field_formulaireReinscription"
+            data-cy="formulaireReinscription"
+            formControlName="formulaireReinscription"
+          />
+          <input
+            type="hidden"
+            class="form-control"
+            name="formulaireReinscriptionContentType"
+            id="field_formulaireReinscriptionContentType"
+            formControlName="formulaireReinscriptionContentType"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="doctorantApp.reinscription.demande" for="field_demande">Demande</label>
+          <div>
+            <div *ngIf="editForm.get('demande')!.value" class="form-text text-danger clearfix">
+              <a
+                class="pull-start"
+                (click)="openFile(editForm.get('demande')!.value, editForm.get('demandeContentType')!.value)"
+                jhiTranslate="entity.action.open"
+                >open</a
+              ><br />
+              <span class="pull-start"
+                >{{ editForm.get('demandeContentType')!.value }}, {{ byteSize(editForm.get('demande')!.value) }}</span
+              >
+              <button
+                type="button"
+                (click)="editForm.patchValue({ demande: null }); editForm.patchValue({ demandeContentType: null })"
+                class="btn btn-secondary btn-xs pull-end"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_demande"
+              data-cy="demande"
+              (change)="setFileData($event, 'demande', false)"
+              jhiTranslate="entity.action.addblob"
+            />
+          </div>
+          <input type="hidden" class="form-control" name="demande" id="field_demande" data-cy="demande" formControlName="demande" />
+          <input
+            type="hidden"
+            class="form-control"
+            name="demandeContentType"
+            id="field_demandeContentType"
+            formControlName="demandeContentType"
+          />
+        </div>
+
+        <div class="row mb-3" *ngIf="false">
+          <label class="form-label" jhiTranslate="doctorantApp.reinscription.annee" for="field_annee">Annee</label>
+          <input type="number" class="form-control" name="annee" id="field_annee" data-cy="annee" formControlName="annee" />
+        </div>
+
+        <div class="row mb-3"  >
+          <div style="place-content: flex-start; ">
+            <input type="checkbox" (change)="toggleEditable({event : $event})">
+            <label class="form-label" >Cotutelle</label>
+          </div>
+        </div>
+
+        <div class="row mb-3" *ngIf="contentEditable">
+          <label class="form-label" jhiTranslate="doctorantApp.reinscription.etablissement" for="field_etablissement">Etablissement</label>
+          <select
+            class="form-control"
+            id="field_etablissement"
+            data-cy="etablissement"
+            name="etablissement"
+            formControlName="etablissement"
+          >
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                etablissementOption.id === editForm.get('etablissement')!.value?.id
+                  ? editForm.get('etablissement')!.value
+                  : etablissementOption
+              "
+              *ngFor="let etablissementOption of etablissementsSharedCollection; trackBy: trackEtablissementById"
+            >
+              {{ etablissementOption.nom }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3" *ngIf="false">
+          <label class="form-label" jhiTranslate="doctorantApp.reinscription.doctorant" for="field_doctorant">Doctorant</label>
+          <select class="form-control" id="field_doctorant" data-cy="doctorant" name="doctorant" formControlName="doctorant">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="doctorantOption.id === editForm.get('doctorant')!.value?.id ? editForm.get('doctorant')!.value : doctorantOption"
+              *ngFor="let doctorantOption of doctorantsSharedCollection; trackBy: trackDoctorantById"
+            >
+              {{ doctorantOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

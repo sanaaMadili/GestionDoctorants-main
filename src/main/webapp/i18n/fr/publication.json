@@ -1,0 +1,31 @@
+{
+  "doctorantApp": {
+    "publication": {
+      "home": {
+        "title": "Publications",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Publication",
+        "createOrEditLabel": "Créer ou éditer un Publication",
+        "notFound": "Aucun Publication trouvé"
+      },
+      "created": "Un nouveau Publication a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Publication avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Publication avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Publication {{ id }} ?"
+      },
+      "detail": {
+        "title": "Publication"
+      },
+      "id": "ID",
+      "titre": "Titre",
+      "date": "Date",
+      "description": "Description",
+      "type": "Type",
+      "article": "Article",
+      "chercheur": "Chercheur",
+      "chercheurExterne": "Chercheur Externe",
+      "user": "User"
+    }
+  }
+}

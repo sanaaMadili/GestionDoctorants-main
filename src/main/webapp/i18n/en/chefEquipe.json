@@ -1,0 +1,27 @@
+{
+  "doctorantApp": {
+    "chefEquipe": {
+      "home": {
+        "title": "Chef Equipes",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Chef Equipe",
+        "createOrEditLabel": "Create or edit a Chef Equipe",
+        "notFound": "No Chef Equipes found"
+      },
+      "created": "A new Chef Equipe is created with identifier {{ param }}",
+      "updated": "A Chef Equipe is updated with identifier {{ param }}",
+      "deleted": "A Chef Equipe is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Chef Equipe {{ id }}?"
+      },
+      "detail": {
+        "title": "Chef Equipe"
+      },
+      "id": "ID",
+      "dateDebut": "Date Debut",
+      "dateFin": "Date Fin",
+      "extraUser": "Extra User",
+      "equipe": "Equipe"
+    }
+  }
+}
