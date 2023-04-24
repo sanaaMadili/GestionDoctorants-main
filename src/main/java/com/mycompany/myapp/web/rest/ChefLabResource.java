@@ -2,6 +2,9 @@ package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.domain.ChefLab;
 import com.mycompany.myapp.repository.ChefLabRepository;
+import com.mycompany.myapp.repository.UserRepository;
+import com.mycompany.myapp.security.AuthoritiesConstants;
+import com.mycompany.myapp.security.SecurityUtils;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -36,10 +39,13 @@ public class ChefLabResource {
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
+    private UserRepository userRepository;
+
     private final ChefLabRepository chefLabRepository;
 
-    public ChefLabResource(ChefLabRepository chefLabRepository) {
+    public ChefLabResource(ChefLabRepository chefLabRepository ,UserRepository userRepository) {
         this.chefLabRepository = chefLabRepository;
+        this.userRepository=userRepository;
     }
 
     /**
@@ -150,11 +156,23 @@ public class ChefLabResource {
      * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of chefLabs in body.
      */
-    @GetMapping("/chef-labs")
+    @GetMapping("/chef-labs/paruser")
     public List<ChefLab> getAllChefLabs(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
-        log.debug("REST request to get all ChefLabs");
-        return chefLabRepository.findAllWithEagerRelationships();
+        if(SecurityUtils.hasCurrentUserAnyOfAuthorities(AuthoritiesConstants.PROFESSEUR)){
+            return  chefLabRepository.cheflabdparuser(userRepository.getByLogin(SecurityUtils.getCurrentUserLogin().get()));
+        }else{
+            log.debug("REST request to get all ChefLabs");
+            return chefLabRepository.findAllWithEagerRelationships();
+        }
     }
+
+    @GetMapping("/chef-labs")
+    public List<ChefLab> getAllChefLabss(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
+
+            log.debug("REST request to get all ChefLabs");
+            return chefLabRepository.findAllWithEagerRelationships();
+    }
+
 
     /**
      * {@code GET  /chef-labs/:id} : get the "id" chefLab.

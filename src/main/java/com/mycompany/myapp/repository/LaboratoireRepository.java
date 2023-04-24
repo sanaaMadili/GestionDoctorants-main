@@ -1,10 +1,9 @@
 package com.mycompany.myapp.repository;
 
-import com.mycompany.myapp.domain.ExtraUser;
-import com.mycompany.myapp.domain.Laboratoire;
-import com.mycompany.myapp.domain.Sujet;
+import com.mycompany.myapp.domain.*;
 import liquibase.pro.packaged.I;
 import org.springframework.data.jpa.repository.*;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -23,5 +22,8 @@ public interface LaboratoireRepository extends JpaRepository<Laboratoire, Long> 
 
     @Query(value="SELECT * FROM laboratoire   WHERE id IN (SELECT laboratoire_id FROM chef_lab )", nativeQuery = true)
     List<Laboratoire>  list();
+    @Query(value="SELECT * FROM laboratoire  WHERE id IN  (select laboratoire_id from chef_lab where extra_user_id IN (SELECT id FROM extra_user  WHERE internal_user_id =:id ))", nativeQuery = true)
+
+    List<Laboratoire> labduprofesseur(@Param("id") User id);
 
 }

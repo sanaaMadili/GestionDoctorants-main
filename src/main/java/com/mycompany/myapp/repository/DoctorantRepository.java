@@ -6,6 +6,7 @@ import com.mycompany.myapp.domain.Doctorant;
 import java.util.List;
 import java.util.Optional;
 
+import com.mycompany.myapp.domain.Publication;
 import com.mycompany.myapp.domain.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -65,5 +66,6 @@ public interface DoctorantRepository extends JpaRepository<Doctorant, Long> {
     @Transactional
     @Query("update Doctorant doc set doc.etatDossier = 0 where doc.id>0 and doc.etatDossier!=3")
     void reinscription();
-
+    @Query(value="select * from doctorant where sujet_id in (select id from  sujet where encadrent_id in (select id from  extra_user where id=:id))", nativeQuery = true)
+    List<Doctorant> doctorantbymembre(@Param("id") long id);
 }

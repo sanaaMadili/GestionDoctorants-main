@@ -54,7 +54,9 @@ export class LaboratoireUpdateComponent implements OnInit {
     this.isSaving = true;
     this.laboratoire = this.createFromForm();
     if (this.laboratoire.id !== undefined) {
+
       this.subscribeToSaveResponse1(this.laboratoireService.update(this.laboratoire));
+      
       if(this.editForm.get(['extrauser'])!.value !== null){
       this.subscribeToSaveResponseup(this.cheflaboratoireservice.updatedate(this.laboratoire.id));}
 
@@ -121,7 +123,7 @@ export class LaboratoireUpdateComponent implements OnInit {
 }
 protected loadRelationshipsOptions(): void {
   this.extraUserService
-    .query1()
+    .query()
     .pipe(map((res: HttpResponse<IExtraUser[]>) => res.body ?? []))
     .pipe(
       map((extraUsers: IExtraUser[]) =>

@@ -1,5 +1,6 @@
 import { ILaboratoire } from 'app/entities/laboratoire/laboratoire.model';
 import { IMembreEquipe } from 'app/entities/membre-equipe/membre-equipe.model';
+import { ExtraUser, IExtraUser } from 'app/entities/extra-user/extra-user.model';
 
 export interface IEquipe {
   id?: number;
@@ -7,6 +8,7 @@ export interface IEquipe {
   abreviation?: string;
   laboratoire?: ILaboratoire | null;
   membreEquipes?: IMembreEquipe[] | null;
+  extrauser ?: ExtraUser | null
 }
 
 export class Equipe implements IEquipe {
@@ -15,7 +17,8 @@ export class Equipe implements IEquipe {
     public nom?: string,
     public abreviation?: string,
     public laboratoire?: ILaboratoire | null,
-    public membreEquipes?: IMembreEquipe[] | null
+    public membreEquipes?: IMembreEquipe[] | null,
+    public extrauser ?: ExtraUser | null
   ) {}
 }
 

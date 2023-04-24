@@ -185,6 +185,11 @@ public class PublicationResource {
         log.debug("REST request to get all Publications");
         return publicationRepository.PublicationType(login);
     }
+    @GetMapping("/publications/pub/{login}")
+    public List<Publication> Publicationbyuser(@PathVariable String login) {
+        log.debug("pub/loginjhbbbbbbbbbbbbbbbbbhjjjjjjj");
+        return publicationRepository.publicationbyuser(login);
+    }
 
     /**
      * {@code GET  /publications/:id} : get the "id" publication.

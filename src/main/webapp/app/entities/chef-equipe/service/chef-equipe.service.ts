@@ -32,6 +32,18 @@ export class ChefEquipeService {
       .put<IChefEquipe>(`${this.resourceUrl}/${getChefEquipeIdentifier(chefEquipe) as number}`, copy, { observe: 'response' })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
+  updatedate(id: number): Observable<any> {
+    return this.http
+      .patch<number>(`${this.resourceUrl}/${id}/updatedate`,id, { observe: 'response' })
+      .pipe(map((res: any) => this.convertDateFromServer(res)));
+  }
+  queryparuser(req?: any): Observable<EntityArrayResponseType> {
+    const options = createRequestOption(req);
+    return this.http
+      .get<IChefEquipe[]>(this.resourceUrl+"/paruser", { params: options, observe: 'response' })
+      .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+  }
+
 
   partialUpdate(chefEquipe: IChefEquipe): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(chefEquipe);

@@ -102,7 +102,7 @@ export class ChefEquipeUpdateComponent implements OnInit {
 
   protected loadRelationshipsOptions(): void {
     this.extraUserService
-      .query({ filter: 'chefequipe-is-null' })
+      .querymembre({ filter: 'chefequipe-is-null' })
       .pipe(map((res: HttpResponse<IExtraUser[]>) => res.body ?? []))
       .pipe(
         map((extraUsers: IExtraUser[]) =>

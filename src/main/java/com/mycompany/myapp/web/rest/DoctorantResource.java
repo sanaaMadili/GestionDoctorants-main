@@ -4,6 +4,7 @@ import com.mycompany.myapp.charts.CountDoc;
 import com.mycompany.myapp.charts.DocS;
 import com.mycompany.myapp.charts.DoctorantCountSalariee;
 import com.mycompany.myapp.domain.Doctorant;
+import com.mycompany.myapp.domain.Publication;
 import com.mycompany.myapp.domain.User;
 import com.mycompany.myapp.repository.DoctorantRepository;
 import com.mycompany.myapp.repository.UserRepository;
@@ -239,7 +240,11 @@ public class DoctorantResource {
         Optional<Doctorant> doctorant = doctorantRepository.findOneWithEagerRelationships(id);
         return ResponseUtil.wrapOrNotFound(doctorant);
     }
-
+    @GetMapping("/doctorants/doctorant/{id}")
+    public List<Doctorant> Publicationbyuser(@PathVariable long id) {
+        log.debug("pREST request to get Doctorant  for each membre ");
+        return doctorantRepository.doctorantbymembre(id);
+    }
     @GetMapping("/doctorants/this")
     public Doctorant getDoctorantAcctiveUser() {
         log.debug("REST request to get Doctorant ");

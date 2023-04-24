@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
 import {SessionStorageService} from 'ngx-webstorage';
+import { ChefLabService } from 'app/entities/chef-lab/service/chef-lab.service';
+import { IChefLab } from 'app/entities/chef-lab/chef-lab.model';
 
 import {VERSION} from 'app/app.constants';
 import {LANGUAGES} from 'app/config/language.constants';
@@ -32,6 +34,8 @@ export class NavbarComponent implements OnInit {
   entitiesNavbarItems: any[] = [];
   nbNotification!: number;
   notification!: Notification[];
+  chefLabs: IChefLab[]=[];
+
   constructor(
     private loginService: LoginService,
     protected notificationService: NotificationService,
@@ -40,6 +44,7 @@ export class NavbarComponent implements OnInit {
     private accountService: AccountService,
     private profileService: ProfileService,
     private router: Router
+    ,protected cheflaboratoireservice: ChefLabService
     , public _sanitizer: DomSanitizer
   ) {
     if (VERSION) {
@@ -73,10 +78,19 @@ export class NavbarComponent implements OnInit {
       this.account = account;
     });
 
+
   }
   ngOnInit(): void {
+    this.cheflaboratoireservice.queryparuser().subscribe({
+      next: (res: HttpResponse<IChefLab[]>) => {
+        this.chefLabs = res.body ?? [];
+      }
+    });
+
     this.entitiesNavbarItems = EntityNavbarItems;
+
     this.loadAll();
+
   }
 
   changeLanguage(languageKey: string): void {

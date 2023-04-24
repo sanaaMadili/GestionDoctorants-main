@@ -44,17 +44,16 @@
           </div>
         </div>
 
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="doctorantApp.equipe.laboratoire" for="field_laboratoire">Laboratoire</label>
-          <select class="form-control" id="field_laboratoire" data-cy="laboratoire" name="laboratoire" formControlName="laboratoire">
+
+        <div class="row mb-3" *ngIf="true">
+          <label class="form-label" for="field_extrauser">Chef equipe</label>
+          <select class="form-control" id="field_extrauser" data-cy="extrauser" name="extrauser" formControlName="extrauser">
             <option [ngValue]="null"></option>
             <option
-              [ngValue]="
-                laboratoireOption.id === editForm.get('laboratoire')!.value?.id ? editForm.get('laboratoire')!.value : laboratoireOption
-              "
-              *ngFor="let laboratoireOption of laboratoiresSharedCollection; trackBy: trackLaboratoireById"
+              [ngValue]="extraUserOption.id === editForm.get('extrauser')!.value?.id ? editForm.get('extrauser')!.value : extraUserOption"
+              *ngFor="let extraUserOption of extraUsersSharedCollection; trackBy: trackExtraUserById"
             >
-              {{ laboratoireOption.nom }}
+             Pr. {{ extraUserOption.nomArabe }}
             </option>
           </select>
         </div>

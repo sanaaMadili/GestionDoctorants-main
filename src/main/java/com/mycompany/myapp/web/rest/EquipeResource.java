@@ -2,6 +2,9 @@ package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.domain.Equipe;
 import com.mycompany.myapp.repository.EquipeRepository;
+import com.mycompany.myapp.repository.UserRepository;
+import com.mycompany.myapp.security.AuthoritiesConstants;
+import com.mycompany.myapp.security.SecurityUtils;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -33,11 +36,13 @@ public class EquipeResource {
 
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
+    private UserRepository userRepository;
 
     private final EquipeRepository equipeRepository;
 
-    public EquipeResource(EquipeRepository equipeRepository) {
+    public EquipeResource(EquipeRepository equipeRepository , UserRepository userRepository) {
         this.equipeRepository = equipeRepository;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -150,8 +155,26 @@ public class EquipeResource {
      */
     @GetMapping("/equipes")
     public List<Equipe> getAllEquipes(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
-        log.debug("REST request to get all Equipes");
-        return equipeRepository.findAllWithEagerRelationships();
+        if(SecurityUtils.hasCurrentUserAnyOfAuthorities(AuthoritiesConstants.PROFESSEUR)){
+            return  equipeRepository.cheflab(userRepository.getByLogin(SecurityUtils.getCurrentUserLogin().get()));
+        }else{
+            log.debug("REST request to get all Equipes");
+            return equipeRepository.findAllWithEagerRelationships();
+        }
+
+
+    }
+
+    @GetMapping("/equipes/dechefequipe")
+    public List<Equipe> getAllEquipesS(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
+        if(SecurityUtils.hasCurrentUserAnyOfAuthorities(AuthoritiesConstants.PROFESSEUR)){
+            return  equipeRepository.chefequipe(userRepository.getByLogin(SecurityUtils.getCurrentUserLogin().get()));
+        }else{
+            log.debug("REST request to get all Equipes");
+            return equipeRepository.findAllWithEagerRelationships();
+        }
+
+
     }
 
     /**

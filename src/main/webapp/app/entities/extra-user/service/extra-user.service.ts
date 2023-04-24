@@ -51,6 +51,12 @@ export class ExtraUserService {
       .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
   }
 
+  querymembre(req?: any): Observable<EntityArrayResponseType> {
+    const options = createRequestOption(req);
+    return this.http
+      .get<IExtraUser[]>(this.resourceUrl+"/users", { params: options, observe: 'response' })
+      .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+  }
 
   query1(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);

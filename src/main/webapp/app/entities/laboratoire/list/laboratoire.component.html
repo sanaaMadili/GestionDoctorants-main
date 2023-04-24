@@ -47,7 +47,7 @@
           </td>
           <td>{{ laboratoire.nom }}</td>
           <td>{{ laboratoire.abreviation }}</td>
-          <td *ngIf="laboratoire.extrauser!=undefined" >{{ laboratoire.extrauser.nomArabe }}</td>
+          <td><span class="badge bg-info" *ngIf="laboratoire.extrauser!=undefined" >{{ laboratoire.extrauser.nomArabe }}</span></td>
 
           <td class="text-end">
             <div class="btn-group">

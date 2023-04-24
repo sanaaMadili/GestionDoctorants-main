@@ -1,11 +1,12 @@
 <div>
   <h2 id="page-heading" data-cy="EquipeHeading">
     <span jhiTranslate="doctorantApp.equipe.home.title">Equipes</span>
+    <div class="" id="no-result" *ngIf="chefLabs && chefLabs[0] && chefLabs[0].laboratoire!==undefined">
 
     <div class="d-flex justify-content-end">
       <button class="btn btn-info me-2" (click)="loadAll()" [disabled]="isLoading">
         <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
-        <span jhiTranslate="doctorantApp.equipe.home.refreshListLabel">Refresh List</span>
+        <span jhiTranslate="doctorantApp.equipe.home.refreshListLabel"> Refresh List</span>
       </button>
 
       <button
@@ -18,6 +19,7 @@
         <span jhiTranslate="doctorantApp.equipe.home.createLabel"> Create a new Equipe </span>
       </button>
     </div>
+    </div>
   </h2>
 
   <jhi-alert-error></jhi-alert-error>
@@ -25,7 +27,7 @@
   <jhi-alert></jhi-alert>
 
   <div class="alert alert-warning" id="no-result" *ngIf="equipes?.length === 0">
-    <span jhiTranslate="doctorantApp.equipe.home.notFound">No equipes found</span>
+    <span jhiTranslate="">Vous avez pas le privilege de creer de equipes</span>
   </div>
 
   <div class="table-responsive" id="entities" *ngIf="equipes && equipes.length > 0">
@@ -36,6 +38,8 @@
           <th scope="col"><span jhiTranslate="doctorantApp.equipe.nom">Nom</span></th>
           <th scope="col"><span jhiTranslate="doctorantApp.equipe.abreviation">Abreviation</span></th>
           <th scope="col"><span jhiTranslate="doctorantApp.equipe.laboratoire">Laboratoire</span></th>
+          <th scope="col"><span jhiTranslate="">Chef Equipe</span></th>
+
           <th scope="col"></th>
         </tr>
       </thead>
@@ -51,6 +55,9 @@
               <a [routerLink]="['/laboratoire', equipe.laboratoire?.id, 'view']">{{ equipe.laboratoire?.nom }}</a>
             </div>
           </td>
+          <td><span class="badge bg-info" >{{ equipe.extrauser!.nomArabe }}</span></td>
+
+
           <td class="text-end">
             <div class="btn-group">
               <button type="submit" [routerLink]="['/equipe', equipe.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
+import dayjs from 'dayjs/esm';
+import { ChefEquipeService } from 'app/entities/chef-equipe/service/chef-equipe.service';
+import { IChefEquipe } from 'app/entities/chef-equipe/chef-equipe.model';
 import { IMembreEquipe } from '../membre-equipe.model';
 import { MembreEquipeService } from '../service/membre-equipe.service';
 import { MembreEquipeDeleteDialogComponent } from '../delete/membre-equipe-delete-dialog.component';
@@ -13,8 +15,9 @@ import { MembreEquipeDeleteDialogComponent } from '../delete/membre-equipe-delet
 export class MembreEquipeComponent implements OnInit {
   membreEquipes?: IMembreEquipe[];
   isLoading = false;
+  chefEquipes?: IChefEquipe[];
 
-  constructor(protected membreEquipeService: MembreEquipeService, protected modalService: NgbModal) {}
+  constructor(protected membreEquipeService: MembreEquipeService, protected chefequipeservice : ChefEquipeService , protected modalService: NgbModal) {}
 
   loadAll(): void {
     this.isLoading = true;
@@ -28,11 +31,23 @@ export class MembreEquipeComponent implements OnInit {
         this.isLoading = false;
       },
     });
+
+    this.chefequipeservice.queryparuser().subscribe({
+      next: (res: HttpResponse<IChefEquipe[]>) => {
+        this.isLoading = false;
+        this.chefEquipes = res.body ?? [];
+      },
+      error: () => {
+        this.isLoading = false;
+      },
+    });
   }
 
   ngOnInit(): void {
     this.loadAll();
   }
+
+
 
   trackId(index: number, item: IMembreEquipe): number {
     return item.id!;

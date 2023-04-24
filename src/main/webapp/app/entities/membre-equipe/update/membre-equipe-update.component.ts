@@ -4,6 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
+import dayjs from 'dayjs/esm';
 
 import { IMembreEquipe, MembreEquipe } from '../membre-equipe.model';
 import { MembreEquipeService } from '../service/membre-equipe.service';
@@ -21,7 +22,7 @@ export class MembreEquipeUpdateComponent implements OnInit {
 
   equipesSharedCollection: IEquipe[] = [];
   extraUsersSharedCollection: IExtraUser[] = [];
-
+  membreEquipe!:IMembreEquipe;
   editForm = this.fb.group({
     id: [],
     dateDebut: [null, [Validators.required]],
@@ -52,11 +53,11 @@ export class MembreEquipeUpdateComponent implements OnInit {
 
   save(): void {
     this.isSaving = true;
-    const membreEquipe = this.createFromForm();
-    if (membreEquipe.id !== undefined) {
-      this.subscribeToSaveResponse(this.membreEquipeService.update(membreEquipe));
+this.membreEquipe = this.createFromForm();
+    if (this.membreEquipe.id !== undefined) {
+      this.subscribeToSaveResponse(this.membreEquipeService.update(this.membreEquipe));
     } else {
-      this.subscribeToSaveResponse(this.membreEquipeService.create(membreEquipe));
+      this.subscribeToSaveResponse(this.membreEquipeService.updatedate(this.membreEquipe.extraUser!.id!));
     }
   }
 
@@ -67,8 +68,14 @@ export class MembreEquipeUpdateComponent implements OnInit {
   trackExtraUserById(index: number, item: IExtraUser): number {
     return item.id!;
   }
-
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IMembreEquipe>>): void {
+    result.pipe(finalize(() => this.onSaveFinalize())).subscribe({
+      next: () => this.subscribeToSaveResponse1(this.membreEquipeService.create(this.membreEquipe)),
+      error: () => this.onSaveError(),
+    });
+  }
+
+  protected subscribeToSaveResponse1(result: Observable<HttpResponse<IMembreEquipe>>): void {
     result.pipe(finalize(() => this.onSaveFinalize())).subscribe({
       next: () => this.onSaveSuccess(),
       error: () => this.onSaveError(),
@@ -105,7 +112,7 @@ export class MembreEquipeUpdateComponent implements OnInit {
 
   protected loadRelationshipsOptions(): void {
     this.equipeService
-      .query()
+      .querychefequipe()
       .pipe(map((res: HttpResponse<IEquipe[]>) => res.body ?? []))
       .pipe(map((equipes: IEquipe[]) => this.equipeService.addEquipeToCollectionIfMissing(equipes, this.editForm.get('equipe')!.value)))
       .subscribe((equipes: IEquipe[]) => (this.equipesSharedCollection = equipes));
@@ -125,9 +132,9 @@ export class MembreEquipeUpdateComponent implements OnInit {
     return {
       ...new MembreEquipe(),
       id: this.editForm.get(['id'])!.value,
-      dateDebut: this.editForm.get(['dateDebut'])!.value,
-      datefin: this.editForm.get(['datefin'])!.value,
-      equipe: this.editForm.get(['equipe'])!.value,
+      dateDebut:dayjs(),
+      datefin: dayjs().set('year', 0).set('month', 0).set('day', 0),
+      equipe: this.equipesSharedCollection[0],
       extraUser: this.editForm.get(['extraUser'])!.value,
     };
   }

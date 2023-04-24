@@ -5,10 +5,11 @@ import { MembreEquipeDetailComponent } from './detail/membre-equipe-detail.compo
 import { MembreEquipeUpdateComponent } from './update/membre-equipe-update.component';
 import { MembreEquipeDeleteDialogComponent } from './delete/membre-equipe-delete-dialog.component';
 import { MembreEquipeRoutingModule } from './route/membre-equipe-routing.module';
+import { ChefEquipeModule } from "../chef-equipe/chef-equipe.module";
 
 @NgModule({
-  imports: [SharedModule, MembreEquipeRoutingModule],
-  declarations: [MembreEquipeComponent, MembreEquipeDetailComponent, MembreEquipeUpdateComponent, MembreEquipeDeleteDialogComponent],
-  entryComponents: [MembreEquipeDeleteDialogComponent],
+    declarations: [MembreEquipeComponent, MembreEquipeDetailComponent, MembreEquipeUpdateComponent, MembreEquipeDeleteDialogComponent],
+    entryComponents: [MembreEquipeDeleteDialogComponent],
+    imports: [SharedModule, MembreEquipeRoutingModule, ChefEquipeModule]
 })
 export class MembreEquipeModule {}

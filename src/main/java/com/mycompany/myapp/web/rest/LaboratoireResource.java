@@ -2,6 +2,9 @@ package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.domain.Laboratoire;
 import com.mycompany.myapp.repository.LaboratoireRepository;
+import com.mycompany.myapp.repository.UserRepository;
+import com.mycompany.myapp.security.AuthoritiesConstants;
+import com.mycompany.myapp.security.SecurityUtils;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -33,11 +36,12 @@ public class LaboratoireResource {
 
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
-
+    private UserRepository userRepository;
     private final LaboratoireRepository laboratoireRepository;
 
-    public LaboratoireResource(LaboratoireRepository laboratoireRepository) {
+    public LaboratoireResource(LaboratoireRepository laboratoireRepository , UserRepository userRepository) {
         this.laboratoireRepository = laboratoireRepository;
+        this.userRepository=userRepository;
     }
 
     /**
@@ -149,8 +153,13 @@ public class LaboratoireResource {
      */
     @GetMapping("/laboratoires")
     public List<Laboratoire> getAllLaboratoires() {
-        log.debug("REST request to get all Laboratoires");
-        return laboratoireRepository.findAll();
+        if(SecurityUtils.hasCurrentUserAnyOfAuthorities(AuthoritiesConstants.PROFESSEUR)){
+            return  laboratoireRepository.labduprofesseur(userRepository.getByLogin(SecurityUtils.getCurrentUserLogin().get()));
+        }else{
+            log.debug("REST request to get all Laboratoires");
+            return laboratoireRepository.findAll();
+        }
+
     }
     @GetMapping("/laboratoires/nombre")
     public Laboratoire getAllLaboratoiresS() {
@@ -166,6 +175,7 @@ public class LaboratoireResource {
      */
     @GetMapping("/laboratoires/{id}")
     public ResponseEntity<Laboratoire> getLaboratoire(@PathVariable Long id) {
+
         log.debug("REST request to get Laboratoire : {}", id);
         Optional<Laboratoire> laboratoire = laboratoireRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(laboratoire);

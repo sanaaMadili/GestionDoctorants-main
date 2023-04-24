@@ -1,7 +1,11 @@
 package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.domain.ChefEquipe;
+import com.mycompany.myapp.domain.ChefLab;
 import com.mycompany.myapp.repository.ChefEquipeRepository;
+import com.mycompany.myapp.repository.UserRepository;
+import com.mycompany.myapp.security.AuthoritiesConstants;
+import com.mycompany.myapp.security.SecurityUtils;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -33,11 +37,13 @@ public class ChefEquipeResource {
 
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
+    private UserRepository userRepository;
 
     private final ChefEquipeRepository chefEquipeRepository;
 
-    public ChefEquipeResource(ChefEquipeRepository chefEquipeRepository) {
+    public ChefEquipeResource(ChefEquipeRepository chefEquipeRepository,UserRepository userRepository) {
         this.chefEquipeRepository = chefEquipeRepository;
+        this.userRepository=userRepository;
     }
 
     /**
@@ -94,6 +100,15 @@ public class ChefEquipeResource {
             .body(result);
     }
 
+    @PatchMapping("/chef-equipes/{id}/updatedate")
+    public ResponseEntity<Void>  Updatedate(@PathVariable Long id) {
+        chefEquipeRepository.updatedate(id);
+        return ResponseEntity
+            .noContent()
+            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
+            .build();
+
+    }
     /**
      * {@code PATCH  /chef-equipes/:id} : Partial updates given fields of an existing chefEquipe, field will ignore if it is null
      *
@@ -149,11 +164,24 @@ public class ChefEquipeResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of chefEquipes in body.
      */
     @GetMapping("/chef-equipes")
-    public List<ChefEquipe> getAllChefEquipes(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
+    public List<ChefEquipe> getAllChefEquipess(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         log.debug("REST request to get all ChefEquipes");
         return chefEquipeRepository.findAllWithEagerRelationships();
     }
-
+    @GetMapping("/chef-equipes/paruser")
+    public List<ChefEquipe> getAllChefEquipes(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
+        if(SecurityUtils.hasCurrentUserAnyOfAuthorities(AuthoritiesConstants.PROFESSEUR)){
+            return  chefEquipeRepository.chefequipeparuser(userRepository.getByLogin(SecurityUtils.getCurrentUserLogin().get()));
+        }else{
+            log.debug("REST request to get all ChefLabs");
+            return chefEquipeRepository.findAllWithEagerRelationships();
+        }
+    }
+    @GetMapping("/chef-equipes/parcheflab")
+    public List<ChefEquipe> getAllChefEquipesparcheflab(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
+        log.debug("REST request to get all ChefEquipes");
+        return chefEquipeRepository.findAllWithEagerRelationships();
+    }
     /**
      * {@code GET  /chef-equipes/:id} : get the "id" chefEquipe.
      *

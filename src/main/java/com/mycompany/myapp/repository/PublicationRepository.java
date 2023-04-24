@@ -75,6 +75,9 @@ public interface PublicationRepository extends PublicationRepositoryWithBagRelat
     @Query("select distinct p.type from Publication p left join User user on p.user=user.id where p.user.login=:login")
     List<String> PublicationType(@Param("login") String login);
 
+    @Query(value="select * from publication where user_id in (select internal_user_id from  extra_user where id=:login)", nativeQuery = true)
+    List<Publication> publicationbyuser(@Param("login") String login);
+
     default List<Publication> findAllWithEagerRelationships33(String id) {
         return this.fetchBagRelationships(this.findPublicationByUserOrChercheurs(id));
     }

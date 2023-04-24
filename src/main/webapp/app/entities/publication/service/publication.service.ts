@@ -46,7 +46,7 @@ export class PublicationService {
 
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
-    return this.http.get<IPublication[]>(`${this.resourceUrl}/this2`, { params: options, observe: 'response' });
+    return this.http.get<IPublication[]>(`${this.resourceUrl}`, { params: options, observe: 'response' });
   }
   publicationCurentUser(): Observable<EntityArrayResponseType> {
     return this.http.get<IPublication[]>(`${this.resourceUrl}/this`, { observe: 'response' });
@@ -67,6 +67,9 @@ export class PublicationService {
   }
   PublicationTypeByuser(login:string):Observable<HttpResponse<string[]>> {
     return this.http.get<string[]>(`${this.resourceUrl}/type/${login}`, { observe: 'response' });
+  }
+  Publicationbyuser(login:string):Observable<EntityArrayResponseType> {
+    return this.http.get<IPublication[]>(`${this.resourceUrl}/pub/${login}`, { observe: 'response' });
   }
   countByUser(id: number):Observable<HttpResponse<CountPub[]>> {
     return this.http.get<CountPub[]>(`${this.resourceUrl}/count/id/${id}`, { observe: 'response' });

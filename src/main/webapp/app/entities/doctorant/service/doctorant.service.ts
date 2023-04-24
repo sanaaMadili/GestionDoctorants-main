@@ -73,6 +73,9 @@ export class DoctorantService {
      return this.http.get<number>(`${this.resourceUrl}/reinscription`, { observe: 'response' });
   }
 
+  Docotorantbyuser(id : number):Observable<EntityArrayResponseType> {
+    return this.http.get<IDoctorant[]>(`${this.resourceUrl}/doctorant/${id}`, { observe: 'response' });
+  }
   addDoctorantToCollectionIfMissing(
     doctorantCollection: IDoctorant[],
     ...doctorantsToCheck: (IDoctorant | null | undefined)[]

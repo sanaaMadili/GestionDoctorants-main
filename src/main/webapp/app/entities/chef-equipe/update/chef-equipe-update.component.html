@@ -77,7 +77,7 @@
               [ngValue]="extraUserOption.id === editForm.get('extraUser')!.value?.id ? editForm.get('extraUser')!.value : extraUserOption"
               *ngFor="let extraUserOption of extraUsersCollection; trackBy: trackExtraUserById"
             >
-              {{ extraUserOption.cin }}
+              {{ extraUserOption.nomArabe }}
             </option>
           </select>
         </div>

@@ -2,6 +2,9 @@ package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.domain.MembreEquipe;
 import com.mycompany.myapp.repository.MembreEquipeRepository;
+import com.mycompany.myapp.repository.UserRepository;
+import com.mycompany.myapp.security.AuthoritiesConstants;
+import com.mycompany.myapp.security.SecurityUtils;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -35,9 +38,11 @@ public class MembreEquipeResource {
     private String applicationName;
 
     private final MembreEquipeRepository membreEquipeRepository;
+    private UserRepository userRepository;
 
-    public MembreEquipeResource(MembreEquipeRepository membreEquipeRepository) {
+    public MembreEquipeResource(MembreEquipeRepository membreEquipeRepository,UserRepository userRepository) {
         this.membreEquipeRepository = membreEquipeRepository;
+        this.userRepository=userRepository;
     }
 
     /**
@@ -149,10 +154,30 @@ public class MembreEquipeResource {
      */
     @GetMapping("/membre-equipes")
     public List<MembreEquipe> getAllMembreEquipes() {
-        log.debug("REST request to get all MembreEquipes");
-        return membreEquipeRepository.findAll();
+        if(SecurityUtils.hasCurrentUserAnyOfAuthorities(AuthoritiesConstants.PROFESSEUR)){
+            return  membreEquipeRepository.chefequipe(userRepository.getByLogin(SecurityUtils.getCurrentUserLogin().get()));
+        }else{
+            return membreEquipeRepository.findAll();
+        }
+
+    }
+    @GetMapping("/membre-equipes/m")
+    public List<MembreEquipe> getAllMembreEquipess() {
+
+            return membreEquipeRepository.findAll();
+
+
     }
 
+    @PatchMapping("/membre-equipes/{id}/updatedate")
+    public ResponseEntity<Void>  Updatedate(@PathVariable Long id) {
+        membreEquipeRepository.updatedate(id);
+        return ResponseEntity
+            .noContent()
+            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
+            .build();
+
+    }
     /**
      * {@code GET  /membre-equipes/:id} : get the "id" membreEquipe.
      *

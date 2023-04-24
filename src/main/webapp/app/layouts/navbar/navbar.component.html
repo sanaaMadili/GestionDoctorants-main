@@ -202,6 +202,8 @@
                 routerLinkActive="active"
                 [routerLinkActiveOptions]="{ exact: true }"
                 (click)="collapseNavbar()"
+                *jhiHasAnyAuthority="['ROLE_PROFESSEUR']"
+
               >
                 <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
                 <span jhiTranslate="global.menu.entities.equipe">Equipe</span>
@@ -253,6 +255,7 @@
                 routerLinkActive="active"
                 [routerLinkActiveOptions]="{ exact: true }"
                 (click)="collapseNavbar()"
+                *jhiHasAnyAuthority="['ROLE_RESPONSABLE']"
               >
                 <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
                 <span jhiTranslate="global.menu.entities.laboratoire">Laboratoire</span>
@@ -265,7 +268,7 @@
                 routerLinkActive="active"
                 [routerLinkActiveOptions]="{ exact: true }"
                 (click)="collapseNavbar()"
-                *ngIf="false"
+                *jhiHasAnyAuthority="['ROLE_PROFESSEUR']"
               >
                 <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
                 <span jhiTranslate="global.menu.entities.membreEquipe">Membre Equipe</span>

@@ -4,7 +4,9 @@ import com.mycompany.myapp.domain.ChefLab;
 import java.util.List;
 import java.util.Optional;
 
+import com.mycompany.myapp.domain.ExtraUser;
 import com.mycompany.myapp.domain.Laboratoire;
+import com.mycompany.myapp.domain.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.*;
@@ -49,4 +51,6 @@ public interface ChefLabRepository extends JpaRepository<ChefLab, Long> {
     @Transactional
     @Query(value="UPDATE chef_lab SET date_fin=current_date WHERE laboratoire_id=:id", nativeQuery = true)
     void  updatedate(@Param("id")  Long id);
+    @Query(value="SELECT * FROM chef_lab WHERE extra_user_id in (SELECT id FROM extra_user  WHERE internal_user_id =:id ) ", nativeQuery = true)
+    List<ChefLab> cheflabdparuser(@Param("id") User id);
 }

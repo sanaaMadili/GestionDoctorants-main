@@ -24,19 +24,269 @@
         </dd>
         <dt><span jhiTranslate="doctorantApp.equipe.laboratoire">Laboratoire</span></dt>
         <dd>
-          <div *ngIf="equipe.laboratoire">
-            <a [routerLink]="['/laboratoire', equipe.laboratoire?.id, 'view']">{{ equipe.laboratoire?.nom }}</a>
-          </div>
+          <span>{{ equipe.laboratoire!.nom }}</span>
         </dd>
-      </dl>
+
+        <dt><span jhiTranslate="">Membre equipe</span></dt>
+
+        <dd>
+          <table class="table " aria-describedby="page-heading">
+            <thead>
+              <tr>
+                <th scope="col"><span >nom</span></th>
+                <th scope="col"><span>Voir publications</span></th>
+                <th scope="col"><span>Voir ses doctorants</span></th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let membre of membresEquipesbd1" data-cy="entityTable">
+                <td>                <span>{{ membre.extraUser!.nomArabe }}</span>
+                </td>
+                <td>    <button  type="button" class="btn btn-primary me-5" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="setMembreSelectionne(membre.extraUser!.id)">
+                  <span> Voir ces publications </span>
+                </button></td>
+                <td>    <button  type="button" class="btn btn-warning me-5" data-bs-toggle="modal" data-bs-target="#exampleModal1" (click)="setMembreSelectionne1(membre.extraUser!.id)">
+                  <span> Voir ces doctorants </span>
+                </button></td>
+              </tr>
+              </tbody>
+              </table>
+
+        </dd>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title text-danger" id="exampleModalLabel">Publications</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body" >
+                <span *ngFor="let pub of publicationfinal | paginate: { itemsPerPage: 2, currentPage: currentPage }">
+                  <p>
+                    </p>
+
+                <div class="card h-100">
+                  <div class="card-body">
+                    <h6 class="d-flex align-items-center text-info mb-6">
+                      <i class="material-icons text-info align-items-center mr-2">public</i>
+                      <button class="text-info card" (click)="afficherChamps(pub)">
+                        {{ pub.titre }}
+                      </button>
+
+                    </h6>
+                    <div class="card-body">
+
+                    <div *ngIf="publicationCourante === pub">
+
+                      <div class="col">
+                        <div class="col-sm-6">
+                          <h6 class="mb-0">Type du publication </h6>
+                        </div>
+                        <div class="col-sm-9 ">
+                          <span> {{ pub.type }} </span>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="col">
+                        <div class="col-sm-6">
+                          <h6 class="mb-0">Date du publication </h6>
+                        </div>
+                        <div class="col-sm-9 ">
+                          <span> {{ pub.date }} </span>
+                        </div>
+                      </div>
+                    <hr>
+                    <div class="col">
+                      <div class="col-sm-6">
+                        <h6 class="mb-0">Description</h6>
+                      </div>
+                      <div class="col-sm-9 ">
+                        <span> {{ pub.description}} </span>
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="col">
+                      <div class="col-sm-6">
+                        <h6 class="mb-0">Les co-auteurs</h6>
+                      </div>
+                      <div class="col-sm-9 " *ngIf="pub.chercheurs">
+
+                        <span *ngFor="let chercheur of pub.chercheurs" >
+                           {{ chercheur.firstName}} </span>
+                      </div>
+                    </div><hr>
+                    <div class="col">
+                      <div class="col-sm-6">
+                        <h6 class="mb-0">Les co-auteurs externe </h6>
+                      </div>
+                      <div class="col-sm-9 " >
+
+                        <span *ngFor="let chercheurExterne of pub.chercheurExternes">
+                          {{ chercheurExterne.nom }}
+                        </span>
+                      </div>
+                    </div>
+
+
+                    </div>
+                    </div>
+                  </div>
+
+                </div>
+              </span>
+              <div class="d-flex justify-content-center mt-3">
+                <ngb-pagination [collectionSize]="publicationfinal.length" [(page)]="currentPage" [pageSize]="pageSize"></ngb-pagination>
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+          </div>
+           <!-- Modal -->
+        <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" style="max-width: 750px; max-height:800px;">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title text-danger" id="exampleModalLabel">Doctorants</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body" *ngIf="doctorants">
+                <span *ngFor="let doctorant of doctorants| paginate: { itemsPerPage: pageSize1, currentPage: currentPage1 }">
+                  <p>
+                    </p>
+
+                <div class="card h-200">
+                  <div class="card-body" >
+
+                    <div class="row" >
+                      <div class="col">
+                        <div class="col-sm-6">
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                          <img *ngIf="doctorant.user!.imageUrl" [src]="decode(doctorant.user!.imageUrl)"
+                          style=" border: 1px solid #ddd;border-radius: 4px; padding: 5px;width: 100px;height:100px;">
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+
+                            <h6 class="d-flex align-items-center  text-info mb-6"><i class="material-icons text-info align-items-center mr-2">assignment</i> <a  type="checkbox"  >Sujet: {{doctorant!.sujet!.titre}}</a></h6>
+                          </div>
+                      </div>
+                      <div class="col">
+                        <div class="row">
+                        <div class="col-sm-10">
+                          <h6 class="mb-0">Firstname </h6>
+                        </div>
+                        <div class="col-sm-9 ">
+                        <span>  {{doctorant!.user?.firstName}} </span>
+                        </div>
+                        </div>
+                        <div class="row">
+                        <div class="col-sm-10">
+                          <h6 class="mb-0">Lastname </h6>
+                        </div>
+                        <div class="col-sm-9 ">
+                         <span> {{doctorant!.user?.lastName }} </span>
+                        </div>
+                        <div class="col-sm-10">
+                          <h6 class="mb-0">Numero CNE </h6>
+                        </div>
+                        <div class="col-sm-11">
+                           <span>{{doctorant!.cne }}</span>
+                           <button class="text-info card" style="max-width: 40px;" (click)="afficherChamps(doctorant)">
+                            <fa-icon icon="eye"></fa-icon>
+
+                          </button>
+                          </div>
+                          </div>
+                        </div>
+                        </div>
+                        </div>
+
+                          <div class="row" >
+                          <div  class="col"*ngIf="publicationCourante === doctorant">
+
+                          <div class="table-responsive" id="entities" *ngIf="doctorants && doctorants.length > 0">
+                            <table class="table table-striped" datatable  aria-describedby="page-heading">
+                              <thead>
+                              <tr>
+                                <th scope="col"><span>Photo</span></th>
+                                <th scope="col"><span jhiTranslate="doctorantApp.doctorant.cne">Cne</span></th>
+                                <th scope="col"><span>Nom </span></th>
+                                <th scope="col"><span>Prenom</span></th>
+                                <th scope="col"><span jhiTranslate="doctorantApp.doctorant.cin">Cin</span></th>
+                                <th scope="col"><span jhiTranslate="doctorantApp.doctorant.anneeInscription">Annee Inscription</span></th>
+                                <th scope="col"><span jhiTranslate="doctorantApp.doctorant.genre">Sexe</span></th>
+                                <th scope="col"><span jhiTranslate="doctorantApp.doctorant.sujet">Sujet</span></th>
+                                <th scope="col"><span jhiTranslate="doctorantApp.doctorant.cursus">Cursus</span></th>
+
+                                <th scope="col"></th>
+                              </tr>
+                              </thead>
+                              <tbody>
+                              <tr>
+
+                                <td>
+                                  <img *ngIf="doctorant.user!.imageUrl" [src]="decode(doctorant.user!.imageUrl)"
+                                       style=" border: 1px solid #ddd;border-radius: 4px; padding: 5px;width: 100px;height:100px;">
+                                </td>
+                                <td>{{ doctorant.cne }}</td>
+                                <td>{{ doctorant.user?.firstName }}</td>
+                                <td>{{ doctorant.user?.lastName }}</td>
+                                <td>{{ doctorant.cin }}</td>
+                                <td>{{ doctorant.anneeInscription }}</td>
+                                <td>{{ doctorant.genre }}</td>
+
+                                <td>
+                                  <div *ngIf="doctorant.sujet">
+                                    <a [routerLink]="['/sujet', doctorant.sujet?.id, 'view']">{{ doctorant.sujet?.titre }}</a>
+                                  </div>
+                                </td>
+                                <td>
+                                  <div *ngIf="doctorant.cursus">
+                                    <a [routerLink]="['/cursus', doctorant.cursus?.id, 'view']">{{ doctorant.cursus?.nom }}</a>
+                                  </div>
+                                </td>
+
+                              </tr>
+                              </tbody>
+                            </table>
+                            </div>
+                            </div>
+                            </div>
+
+
+
+
+
+
+                  </div>
+              </span>
+              <div class="d-flex justify-content-center mt-3">
+                <ngb-pagination [collectionSize]="doctorants.length" [(page)]="currentPage1" [pageSize]="pageSize1"></ngb-pagination>
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+          </div>
+
+
+
 
       <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
         <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
       </button>
 
-      <button type="button" [routerLink]="['/equipe', equipe.id, 'edit']" class="btn btn-primary">
-        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
-      </button>
-    </div>
+
+    </dl>
   </div>
-</div>
+

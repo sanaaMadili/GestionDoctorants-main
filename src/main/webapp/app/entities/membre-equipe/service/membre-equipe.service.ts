@@ -45,11 +45,21 @@ export class MembreEquipeService {
       .get<IMembreEquipe>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
-
+  updatedate(id: number): Observable<any> {
+    return this.http
+      .patch<number>(`${this.resourceUrl}/${id}/updatedate`,id, { observe: 'response' })
+      .pipe(map((res: any) => this.convertDateFromServer(res)));
+  }
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
     return this.http
       .get<IMembreEquipe[]>(this.resourceUrl, { params: options, observe: 'response' })
+      .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+  }
+  querym(req?: any): Observable<EntityArrayResponseType> {
+    const options = createRequestOption(req);
+    return this.http
+      .get<IMembreEquipe[]>(this.resourceUrl+"/m", { params: options, observe: 'response' })
       .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
   }
 

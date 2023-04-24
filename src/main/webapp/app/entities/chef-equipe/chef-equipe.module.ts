@@ -10,5 +10,12 @@ import { ChefEquipeRoutingModule } from './route/chef-equipe-routing.module';
   imports: [SharedModule, ChefEquipeRoutingModule],
   declarations: [ChefEquipeComponent, ChefEquipeDetailComponent, ChefEquipeUpdateComponent, ChefEquipeDeleteDialogComponent],
   entryComponents: [ChefEquipeDeleteDialogComponent],
+  exports: [
+    ChefEquipeUpdateComponent,
+    ChefEquipeUpdateComponent,
+    ChefEquipeUpdateComponent,
+    ChefEquipeUpdateComponent,
+    ChefEquipeUpdateComponent
+  ]
 })
 export class ChefEquipeModule {}

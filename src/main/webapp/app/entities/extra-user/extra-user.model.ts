@@ -14,7 +14,7 @@ export interface IExtraUser {
   genre?: string;
   nomArabe?: string;
   prnomArabe?: string;
-  internalUser?: IUser | null;
+  internalUser?: IUser ;
   sujets?: ISujet[] | null;
   membreEquipes?: IMembreEquipe[] | null;
 }
@@ -31,7 +31,7 @@ export class ExtraUser implements IExtraUser {
     public genre?: string,
     public nomArabe?: string,
     public prnomArabe?: string,
-    public internalUser?: IUser | null,
+    public internalUser?: IUser ,
     public sujets?: ISujet[] | null,
     public membreEquipes?: IMembreEquipe[] | null
   ) {}
